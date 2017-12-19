@@ -49,10 +49,10 @@ public class MainActivity extends Activity implements MainView{
         presenter = new MainPresenter(); //TODO replace this with injection
 
         //test
-        configureRecylcerView();
+        configureCurrenciesRecylcerView();
     }
 
-    private void configureRecylcerView() {
+    private void configureCurrenciesRecylcerView() {
         // use a linear layout manager
         LinearLayoutManager layoutManger = new LinearLayoutManager(this);
         currenciesRecyclerView.setLayoutManager(layoutManger);
@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements MainView{
 
         RecyclerView.Adapter adapter = new CurrenciesAdapter(currencyVMList);
         currenciesRecyclerView.setAdapter(adapter);
-
+        
     }
 
     @Override

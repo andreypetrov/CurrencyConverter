@@ -11,7 +11,7 @@
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_shadow">4dp</dimen>
     <dimen name="card_padding">8dp</dimen>
-    <dimen name="card_field_margins">8dp</dimen>
+    <dimen name="card_field_margins">16dp</dimen>
     <dimen name="card_amount_max_width">100dp</dimen>
     <!-- Font sizes -->
     <dimen name="text_extra_large">20sp</dimen>

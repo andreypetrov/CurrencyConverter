@@ -5,11 +5,11 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels;
  */
 
 public class CurrencyVM {
-    String shortName;
-    String longName;
-    int flagResourceId;
-    double exchangeRate;
-    double amount;
+    public String shortName;
+    public String longName;
+    public int flagResourceId;
+    public String exchangeRate;
+    public String amount;
 
     public CurrencyVM(String shortName, String longName, int flagResourceId) {
         this.shortName = shortName;
@@ -17,11 +17,4 @@ public class CurrencyVM {
         this.flagResourceId = flagResourceId;
     }
 
-    public CurrencyVM(String shortName, String longName, int flagResourceId, double exchangeRate, double amount) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.flagResourceId = flagResourceId;
-        this.exchangeRate = exchangeRate;
-        this.amount = amount;
-    }
 }
