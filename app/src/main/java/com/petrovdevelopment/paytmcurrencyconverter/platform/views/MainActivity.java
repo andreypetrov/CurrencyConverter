@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements MainView{
 
         RecyclerView.Adapter adapter = new CurrenciesAdapter(currencyVMList);
         currenciesRecyclerView.setAdapter(adapter);
-        
+
     }
 
     @Override
@@ -128,7 +128,7 @@ public class MainActivity extends Activity implements MainView{
 
     public void update(String s) {
         L.log(this, "update");
-        testTextView.setText(s);
+        //testTextView.setText(s);
     }
 
     @Override

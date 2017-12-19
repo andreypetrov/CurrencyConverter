@@ -18,6 +18,7 @@ import java.util.List;
 
 public class LocalGateway {
 
+    //TODO map in presenter remotely pulled objects to local view model representation
     public static List<CurrencyVM> getCurrencies(Context context) {
         Resources r = context.getApplicationContext().getResources();
         TypedArray currencyFlags = r.obtainTypedArray(R.array.currency_flags);
