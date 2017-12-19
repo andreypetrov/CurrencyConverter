@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">PaytmCurrencyConverter</string>
+
+    <!--Currencies - 32, with one invalid, to test network response error(ISK) -->
+    <string name="usd_short">USD</string>
+    <string name="jpy_short">JPY</string>
+    <string name="bgn_short">BGN</string>
+    <string name="czk_short">CZK</string>
+    <string name="dkk_short">DKK</string>
+    <string name="gbp_short">GBP</string>
+    <string name="huf_short">HUF</string>
+    <string name="pln_short">PLN</string>
+    <string name="ron_short">RON</string>
+    <string name="sek_short">SEK</string>
+    <string name="chf_short">CHF</string>
+    <string name="nok_short">NOK</string>
+    <string name="hrk_short">HRK</string>
+    <string name="rub_short">RUB</string>
+    <string name="try_short">TRY</string>
+    <string name="aud_short">AUD</string>
+    <string name="brl_short">BRL</string>
+    <string name="cad_short">CAD</string>
+    <string name="cny_short">CNY</string>
+    <string name="hkd_short">HKD</string>
+    <string name="idr_short">IDR</string>
+    <string name="ils_short">ILS</string>
+    <string name="inr_short">INR</string>
+    <string name="krw_short">KRW</string>
+    <string name="mxn_short">MXN</string>
+    <string name="myr_short">MYR</string>
+    <string name="nzd_short">NZD</string>
+    <string name="php_short">PHP</string>
+    <string name="sgd_short">SGD</string>
+    <string name="thb_short">THB</string>
+    <string name="zar_short">ZAR</string>
+    <string name="isk_short">ISK</string>
+
+    <!--Currency descriptions-->
+    <string name="usd_long">US dollar</string>
+    <string name="jpy_long">Japanese yen</string>
+    <string name="bgn_long">Bulgarian lev</string>
+    <string name="czk_long">Czech koruna</string>
+    <string name="dkk_long">Danish krone</string>
+    <string name="gbp_long">Pound sterling</string>
+    <string name="huf_long">Hungarian forint</string>
+    <string name="pln_long">Polish zloty</string>
+    <string name="ron_long">Romanian leu</string>
+    <string name="sek_long">Swedish krona</string>
+    <string name="chf_long">Swiss franc</string>
+    <string name="nok_long">Norwegian krone</string>
+    <string name="hrk_long">Croatian kuna</string>
+    <string name="rub_long">Russian rouble</string>
+    <string name="try_long">Turkish lira</string>
+    <string name="aud_long">Australian dollar</string>
+    <string name="brl_long">Brazilian real</string>
+    <string name="cad_long">Canadian dollar</string>
+    <string name="cny_long">Chinese yuan renminbi</string>
+    <string name="hkd_long">Hong Kong dollar</string>
+    <string name="idr_long">Indonesian rupiah</string>
+    <string name="ils_long">Israeli shekel</string>
+    <string name="inr_long">Indian rupee</string>
+    <string name="krw_long">South Korean won</string>
+    <string name="mxn_long">Mexican peso</string>
+    <string name="myr_long">Malaysian ringgit</string>
+    <string name="nzd_long">New Zealand dollar</string>
+    <string name="php_long">Philippine piso</string>
+    <string name="sgd_long">Singapore dollar</string>
+    <string name="thb_long">Thai baht</string>
+    <string name="zar_long">South African rand</string>
+    <string name="isk_long">Icelandic krona</string>
+
+    <!-- UI -->
+    <string name="amount">Please enter an amount</string>
+    <string name="currency">Currency</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="as_of">As of</string>
+    <string name="amount_label">Amount:</string>
+
+</resources>
