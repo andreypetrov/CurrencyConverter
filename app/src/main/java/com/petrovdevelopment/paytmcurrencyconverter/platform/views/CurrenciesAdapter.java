@@ -37,7 +37,7 @@ class CurrenciesAdapter extends RecyclerView.Adapter<CurrenciesAdapter.ViewHolde
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CurrencyVM currencyVM = currencyVMList.get(position);
-        holder.flag.setImageResource(currencyVM.flagResourceId);
+        holder.flag.setImageDrawable(currencyVM.flagResourceId);
         holder.shortName.setText(currencyVM.shortName);
         holder.longName.setText(currencyVM.longName);
         holder.exchangeRate.setText(currencyVM.exchangeRate);

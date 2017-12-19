@@ -1,5 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Andrey on 2017-12-19.
  */
@@ -7,11 +9,11 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels;
 public class CurrencyVM {
     public String shortName;
     public String longName;
-    public int flagResourceId;
+    public Drawable flagResourceId;
     public String exchangeRate;
     public String amount;
 
-    public CurrencyVM(String shortName, String longName, int flagResourceId) {
+    public CurrencyVM(String shortName, String longName, Drawable flagResourceId) {
         this.shortName = shortName;
         this.longName = longName;
         this.flagResourceId = flagResourceId;
