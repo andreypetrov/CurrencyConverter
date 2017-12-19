@@ -48,6 +48,7 @@ public class MainActivity extends Activity implements MainView{
         testTextView.setText("test");
         presenter = new MainPresenter(); //TODO replace this with injection
 
+        //test
         configureRecylcerView();
     }
 
