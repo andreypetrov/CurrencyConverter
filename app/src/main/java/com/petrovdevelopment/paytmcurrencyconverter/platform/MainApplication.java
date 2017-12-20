@@ -2,7 +2,7 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform;
 
 import android.app.Application;
 
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.LocalRepresentationGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 
 /**
@@ -10,7 +10,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
  */
 
 public class MainApplication extends Application implements MainProvider {
-    LocalRepresentationGateway localGateway;
+    XmlLocalGateway localGateway;
 
     @Override
     public void onCreate() {
@@ -18,8 +18,8 @@ public class MainApplication extends Application implements MainProvider {
         L.log(this, "hello");
     }
 
-    public LocalRepresentationGateway getLocalGateway() {
-        if (localGateway == null) localGateway = new LocalRepresentationGateway(this);
+    public XmlLocalGateway getLocalGateway() {
+        if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
     }
 }

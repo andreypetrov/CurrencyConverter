@@ -36,9 +36,8 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     private void assembleModule() {
-        presenter = new MainPresenter(); //TODO replace this with dagger injection if time permits.
+        presenter = new MainPresenter(getApp()); //TODO replace this with dagger injection if time permits.
         presenter.setView(this);
-        presenter.setProvider(getApp());
     }
 
     private void configureCurrenciesSpinner() {

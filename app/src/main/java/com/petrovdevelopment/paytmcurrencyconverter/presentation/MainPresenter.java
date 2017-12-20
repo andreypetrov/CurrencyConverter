@@ -1,11 +1,12 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalCurrenciesUseCase;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -18,7 +19,9 @@ import java.util.List;
 
 public class MainPresenter {
     private WeakReference<MainView> mainView;
-    private WeakReference<MainProvider> mainProvider;
+    private MainProvider mainProvider;
+
+
 
     private List<CurrencyVM> selectorCurrencies;
     private List<CurrencyVM> listCurrencies;
@@ -29,11 +32,8 @@ public class MainPresenter {
         this.mainView = new WeakReference<>(mainView);
     }
 
-    public void setProvider(MainProvider mainProvider) {
-        this.mainProvider = new WeakReference<>(mainProvider);
-    }
-
-    public MainPresenter() {
+    public MainPresenter(MainProvider mainProvider) {
+        this.mainProvider = mainProvider;
         selectorCurrencies = new ArrayList<>();
         listCurrencies = new ArrayList<>();
     }
@@ -58,16 +58,14 @@ public class MainPresenter {
     }
 
     private void fetchListCurrencies() {
-        MainProvider provider = mainProvider.get();
-        if (provider != null) {
-            showProgressIndicator();
-            listCurrencies = mainProvider.get().getLocalGateway().getCurrencies(); //TODO use proper network call here
-        }
+        new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
+        showProgressIndicator();
+//            listCurrencies = mainProvider.get().getLocalGateway().getCurrencies(); //TODO use proper network call here
+
     }
 
     private void fetchSelectorCurrencies() {
-        MainProvider provider = mainProvider.get();
-        if (provider != null) selectorCurrencies = mainProvider.get().getLocalGateway().getCurrencies();
+        selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
     }
 
     public void onViewStopped() {

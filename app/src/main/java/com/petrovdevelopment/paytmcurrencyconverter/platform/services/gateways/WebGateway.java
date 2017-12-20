@@ -1,17 +1,11 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
-import android.view.View;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.Gateway;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.OnResponseErrorCallback;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.OnResponseSuccessCallback;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ErrorData;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesReponse;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -20,15 +14,45 @@ import okhttp3.Request;
  */
 
 public class WebGateway implements Gateway {
+    OkHttpClient okHttpClient;
 
-    public void fetchExchangeRates(String currency, OnResponseErrorCallback onResponseErrorCallback, OnResponseSuccessCallback<ExchangeRatesReponse> onResponseSuccessCallback) {
-            //TODO implement call via rxjava, calling the callbacks back on the main thread
+    public WebGateway() {
+        okHttpClient = new OkHttpClient();
+    }
 
-            ExchangeRatesReponse response = new ExchangeRatesReponse();
-            onResponseSuccessCallback.onSuccess(response);
+    public Observable<ExchangeRatesResponse> fetchExchangeRates(String currency) {
+        return null;
+//        return Observable.create(emitter -> {
+//                try {
+//                    String exchangeRates = getUserEntitiesFromApi();
+//                    if (responseUserEntities != null) {
+//                        emitter.onNext(userEntityJsonMapper.transformUserEntityCollection(
+//                                responseUserEntities));
+//                        emitter.onComplete();
+//                    } else {
+//                        emitter.onError(new NetworkConnectionException());
+//                    }
+//                } catch (Exception e) {
+//                    emitter.onError(new NetworkConnectionException(e.getCause()));
+//                }
+//            } else {
+//                emitter.onError(new NetworkConnectionException());
+//            }
+//        });
+//
+//
+//
+//
+//
+//
+//
+//        Request request = new Request.Builder().url("https://api.fixer.io/latest").build();
+//        Observable<String> r = Observable
+//                    .fromCallable(()-> client.newCall(request).execute())
+//                    .subscribeOn(Schedulers.io())
+//                    .map(response -> response.body().string())
+//                    .observeOn(AndroidSchedulers.mainThread());
 
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url("https://api.fixer.io/latest").build();
 
             //shimmerContainer.startShimmerAnimation();
 
@@ -49,11 +73,11 @@ public class WebGateway implements Gateway {
 
 
 //
-//    DisposableObserver<String> createObserver(OnResponseErrorCallback onResponseErrorCallback, OnResponseSuccessCallback<ExchangeRatesReponse> onResponseSuccessCallback) {
+//    DisposableObserver<String> createObserver(OnResponseErrorCallback onResponseErrorCallback, OnResponseSuccessCallback<ExchangeRatesResponse> onResponseSuccessCallback) {
 //        return new DisposableObserver<String>() {
 //            @Override
 //            public void onNext(String s) {
-//                onResponseSuccessCallback.onSuccess( new ExchangeRatesReponse());
+//                onResponseSuccessCallback.onSuccess( new ExchangeRatesResponse());
 //            }
 //
 //            @Override

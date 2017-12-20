@@ -6,15 +6,15 @@ import java.util.List;
  * Created by Andrey on 2017-12-19.
  */
 
-public class ExchangeRatesReponse {
+public class ExchangeRatesResponse {
     private String base;
     private String date;
     private List<Rate> rates;
 
-    public ExchangeRatesReponse() {
+    public ExchangeRatesResponse() {
     }
 
-    public ExchangeRatesReponse(String base, String date, List<Rate> rates) {
+    public ExchangeRatesResponse(String base, String date, List<Rate> rates) {
         this.base = base;
         this.date = date;
         this.rates = rates;
