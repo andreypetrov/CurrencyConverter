@@ -52,21 +52,25 @@ public class MainPresenter {
     }
 
 
-    public int getCurrenciesCount() {
+
+
+
+
+
+
+    /** Callbacks for the view to get updated. This allows the view to delegate all "thinking" to the presenter and stay as stupid as possible. Adapters are part of the view layer**/
+    public int getSelectorCurrenciesCount() {
         return currencyVMSpinnerList.size();
     }
-
-    public Object getSpinnerCurrency(int i) {
+    public Object getSelectorCurrency(int i) {
         return currencyVMSpinnerList.get(i);
     }
-
-    public void configureSpinnerCell(CurrencySelectorItemView currencySelectorItemView, int position) {
+    public long getSelectorCurrencyId(int i) {
+        return i;
+    }
+    public void configureSelectorCell(CurrencySelectorItemView currencySelectorItemView, int position) {
         CurrencyVM currencyVM = currencyVMSpinnerList.get(position);
         currencySelectorItemView.displayFlag(currencyVM.flagResourceId);
         currencySelectorItemView.displayShortName(currencyVM.shortName);
-    }
-
-    public long getCurrencyId(int i) {
-        return i;
     }
 }

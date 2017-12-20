@@ -34,17 +34,17 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return presenter.getCurrenciesCount();
+        return presenter.getSelectorCurrenciesCount();
     }
 
     @Override
     public Object getItem(int i) {
-        return presenter.getSpinnerCurrency(i);
+        return presenter.getSelectorCurrency(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return presenter.getCurrencyId(i);
+        return presenter.getSelectorCurrencyId(i);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.configureSpinnerCell(holder, position);
+        presenter.configureSelectorCell(holder, position);
     }
 
     View createView(ViewGroup viewGroup) {
