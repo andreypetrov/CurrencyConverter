@@ -1,6 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,13 @@ import android.widget.TextView;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.CurrencyListItemView;
 
 /**
  * Created by Andrey on 2017-12-19.
  */
 
 public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAdapter.ViewHolder> {
-    MainPresenter presenter;
-
+    private MainPresenter presenter;
 
     public CurrenciesCardAdapter(MainPresenter presenter) {
         this.presenter = presenter;
@@ -33,7 +32,12 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.configureListCurrencyCell(holder, position);
+        CurrencyVM currencyVM = presenter.getListCurrency(position);
+        holder.flagView.setImageDrawable(currencyVM.flag);
+        holder.shortNameView.setText(currencyVM.shortName);
+        holder.longNameView.setText(currencyVM.longName);
+        holder.exchangeRateView.setText(currencyVM.exchangeRate);
+        holder.amountView.setText(currencyVM.amount);
     }
 
     @Override
@@ -41,13 +45,12 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
         return presenter.getListCurrenciesCount();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements CurrencyListItemView{
-        public ImageView flagView;
-        public TextView shortNameView;
-        public TextView longNameView;
-        public TextView exchangeRateView;
-        public TextView amountView;
-
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        ImageView flagView;
+        TextView shortNameView;
+        TextView longNameView;
+        TextView exchangeRateView;
+        TextView amountView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,26 +60,5 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
             exchangeRateView = itemView.findViewById(R.id.exchangeRate);
             amountView = itemView.findViewById(R.id.amount);
         }
-
-        @Override
-        public void displayFlag(Drawable flag) {
-            flagView.setImageDrawable(flag);
-        }
-
-        @Override
-        public void displayShortName(String shortName) {
-            shortNameView.setText(shortName);
-        }
-
-        @Override
-        public void displayExchangeRate(String exchangeRate) {
-            exchangeRateView.setText(exchangeRate);
-        }
-
-        @Override
-        public void displayAmount(String amount) {
-            amountView.setText(amount);
-        }
-
     }
 }

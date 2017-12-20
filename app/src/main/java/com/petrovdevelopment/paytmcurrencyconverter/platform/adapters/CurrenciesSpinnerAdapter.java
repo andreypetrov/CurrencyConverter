@@ -1,7 +1,8 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.CurrencySelectorItemView;
 
 /**
  * Created by Andrey on 2017-12-19.
@@ -20,10 +21,8 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.CurrencyS
 
 public class CurrenciesSpinnerAdapter extends BaseAdapter {
     private MainPresenter presenter;
-    private LayoutInflater layoutInflater; //TODO use for picture
 
-
-    public CurrenciesSpinnerAdapter(MainPresenter presenter, LayoutInflater layoutInflater) {
+    public CurrenciesSpinnerAdapter(MainPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -55,7 +54,9 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.configureSelectorCurrencyItem(holder, position);
+        CurrencyVM currencyVM = presenter.getSelectorCurrency(position); //alternatively we could call getItem(position) as it does the same, but this would require a cast
+        holder.flagView.setImageDrawable(currencyVM.flag);
+        holder.shortNameView.setText(currencyVM.shortName);
     }
 
     View createView(ViewGroup viewGroup) {
@@ -64,24 +65,14 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
         return view;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements CurrencySelectorItemView {
-        public ImageView flagView;
-        public TextView shortNameView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView flagView;
+        TextView shortNameView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flagView = itemView.findViewById(R.id.flag);
             shortNameView = itemView.findViewById(R.id.shortName);
-        }
-
-        @Override
-        public void displayFlag(Drawable flag) {
-            flagView.setImageDrawable(flag);
-        }
-
-        @Override
-        public void displayShortName(String shortName) {
-            shortNameView.setText(shortName);
         }
     }
 

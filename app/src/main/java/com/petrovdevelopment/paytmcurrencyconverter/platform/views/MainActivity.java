@@ -1,12 +1,8 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
 
-import android.app.Activity;
-import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -16,13 +12,9 @@ import android.widget.Spinner;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesCardAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.LocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,12 +53,12 @@ public class MainActivity extends BaseActivity implements MainView {
 
 
     private void configureCurrenciesSpinner() {
-        BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter, getLayoutInflater());
+        BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter);
         currenciesSpinner.setAdapter(adapter);
         currenciesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    presenter.onCurrencySelectorSelected(position);
+                    presenter.onSelectorCurrencySelected(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
