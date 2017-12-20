@@ -58,7 +58,10 @@ public class MainPresenter {
 
 
 
-    /** Callbacks for the view to get updated. This allows the view to delegate all "thinking" to the presenter and stay as stupid as possible. Adapters are part of the view layer**/
+    /** Callbacks for the view to get the currency selector updated. This allows the view to delegate all "thinking" to the presenter and stay as stupid as possible.
+     * From presenter's perspective there is no notion of spinner, as this is an android platform concept.
+     * There is only the notion of an abstract selector - something that will allow you to select one of many currencies. View can decide whether this will be done via a selector or something else.
+     * Adapters are part of the view layer**/
     public int getSelectorCurrenciesCount() {
         return currencyVMSpinnerList.size();
     }
