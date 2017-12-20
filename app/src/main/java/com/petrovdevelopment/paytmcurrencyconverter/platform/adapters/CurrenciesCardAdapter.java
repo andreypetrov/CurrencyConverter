@@ -1,5 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +10,19 @@ import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
-
-import java.util.List;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.CurrencyListItemView;
 
 /**
  * Created by Andrey on 2017-12-19.
  */
 
 public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAdapter.ViewHolder> {
+    MainPresenter presenter;
 
 
-    private List<CurrencyVM> currencyVMList;
-
-    public CurrenciesCardAdapter(List<CurrencyVM> currencyVMList) {
-        if (currencyVMList == null) throw new IllegalArgumentException("view model list cannot be null");
-        this.currencyVMList = currencyVMList;
+    public CurrenciesCardAdapter(MainPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
@@ -34,34 +33,50 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CurrencyVM currencyVM = currencyVMList.get(position);
-        holder.flag.setImageDrawable(currencyVM.flagResourceId);
-        holder.shortName.setText(currencyVM.shortName);
-        holder.longName.setText(currencyVM.longName);
-        holder.exchangeRate.setText(currencyVM.exchangeRate);
-        holder.amount.setText(currencyVM.amount);
+        presenter.configureListCurrencyCell(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return currencyVMList.size();
+        return presenter.getListCurrenciesCount();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView flag;
-        public TextView shortName;
-        public TextView longName;
-        public TextView exchangeRate;
-        public TextView amount;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements CurrencyListItemView{
+        public ImageView flagView;
+        public TextView shortNameView;
+        public TextView longNameView;
+        public TextView exchangeRateView;
+        public TextView amountView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            flag = itemView.findViewById(R.id.flag);
-            shortName = itemView.findViewById(R.id.shortName);
-            longName = itemView.findViewById(R.id.longName);
-            exchangeRate = itemView.findViewById(R.id.exchangeRate);
-            amount = itemView.findViewById(R.id.amount);
+            flagView = itemView.findViewById(R.id.flag);
+            shortNameView = itemView.findViewById(R.id.shortName);
+            longNameView = itemView.findViewById(R.id.longName);
+            exchangeRateView = itemView.findViewById(R.id.exchangeRate);
+            amountView = itemView.findViewById(R.id.amount);
         }
+
+        @Override
+        public void displayFlag(Drawable flag) {
+            flagView.setImageDrawable(flag);
+        }
+
+        @Override
+        public void displayShortName(String shortName) {
+            shortNameView.setText(shortName);
+        }
+
+        @Override
+        public void displayExchangeRate(String exchangeRate) {
+            exchangeRateView.setText(exchangeRate);
+        }
+
+        @Override
+        public void displayAmount(String amount) {
+            amountView.setText(amount);
+        }
+
     }
 }

@@ -7,6 +7,6 @@ import android.graphics.drawable.Drawable;
  */
 
 public interface CurrencySelectorItemView {
-    void displayFlag(Drawable flag);
+    void displayFlag(Drawable flag); //TODO fix drawable reference if time allows?
     void displayShortName(String shortName);
 }

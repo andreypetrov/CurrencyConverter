@@ -66,26 +66,20 @@ public class MainActivity extends BaseActivity implements MainView {
         currenciesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    presenter.onCurrencySelectorSelected(position);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //do nothing
             }
         });
     }
 
     private void configureCurrenciesRecylcerView() {
-        // use a linear layout manager
         GridLayoutManager layoutManger = new GridLayoutManager(this, 2);
-
         currenciesRecyclerView.setLayoutManager(layoutManger);
-        List<CurrencyVM> currencyVMList = getApp().getLocalGateway().getCurrencies();
-
-        RecyclerView.Adapter adapter = new CurrenciesCardAdapter(currencyVMList);
+        RecyclerView.Adapter adapter = new CurrenciesCardAdapter(presenter);
         currenciesRecyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -142,13 +136,6 @@ public class MainActivity extends BaseActivity implements MainView {
 
     }
 
-    public void addSpinner() {
-        //add local spinner only in the recycler view
-    }
-
-    public void removeSpinner() {
-        //remove local spinner only in the recycler view
-    }
 
 
     public void update(String s) {
@@ -163,7 +150,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void updateCurrencyList() {
-        update("heh");
+        currenciesRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override

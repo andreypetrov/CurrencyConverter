@@ -9,6 +9,5 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
 
 public interface MainView {
     void updateCurrencyList();
-
     void updateCurrencySelector();
 }
