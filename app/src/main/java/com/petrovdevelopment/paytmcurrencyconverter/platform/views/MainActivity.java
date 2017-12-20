@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements MainView {
 
     private void configureCurrenciesRecylcerView() {
         // use a linear layout manager
-        StaggeredGridLayoutManager layoutManger = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        GridLayoutManager layoutManger = new GridLayoutManager(this, 2);
 
         currenciesRecyclerView.setLayoutManager(layoutManger);
         List<CurrencyVM> currencyVMList = LocalGateway.getCurrencies(this);

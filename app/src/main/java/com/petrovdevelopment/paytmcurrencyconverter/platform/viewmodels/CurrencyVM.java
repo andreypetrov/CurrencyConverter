@@ -18,7 +18,7 @@ public class CurrencyVM {
         this.longName = longName;
         this.flagResourceId = flagResourceId;
         exchangeRate = "1.35";
-        amount = "2323232322.23";
+        amount = "232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.23";
     }
 
 }

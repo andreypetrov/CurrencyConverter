@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_field_margins"
                 android:layout_marginTop="@dimen/card_field_margins"
-                android:text="@string/bgn_long"
+                android:text="DFASDFASDsasdasdasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasadfasdfasdfasdfasdfasdfasdfaafasdfadfasdfasdfasdf"
                 android:textSize="@dimen/text_small"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/shortName"
@@ -77,7 +77,7 @@
                 android:text="1.35"
                 app:layout_constraintStart_toEndOf="@id/amountLabel"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/exchangeRateLabel" />
+                app:layout_constraintBottom_toBottomOf="@id/exchangeRateLabel" />
 
             <!--Third line-->
             <TextView
@@ -85,7 +85,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_field_margins"
-                android:layout_marginBottom="@dimen/card_field_margins"
                 android:labelFor="@id/amount"
                 android:text="@string/amount_label"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,11 +94,9 @@
                 android:id="@+id/amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_field_margins"
                 android:layout_marginStart="@dimen/card_horizontal_margin"
                 android:text="232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.52"
                 android:maxWidth="@dimen/card_amount_max_width"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/amountLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/amountLabel" />
