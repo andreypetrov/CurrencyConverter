@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -30,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-public class MainActivity extends Activity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
     MainPresenter presenter;
     DisposableObserver<String> observer;
     //ShimmerFrameLayout shimmerContainer;
@@ -47,17 +48,32 @@ public class MainActivity extends Activity implements MainView {
         currenciesRecyclerView  = (RecyclerView) findViewById(R.id.currenciesRecyclerView);
         currenciesSpinner = (Spinner) findViewById(R.id.currenciesSpinner);
 
-        presenter = new MainPresenter(); //TODO replace this with injection
-
+        assembleModule();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
     }
 
-    private void configureCurrenciesSpinner() {
-        List<CurrencyVM> currencyVMList = LocalGateway.getCurrencies(this);
-        BaseAdapter adapter = new CurrenciesSpinnerAdapter(currencyVMList);
+    private void assembleModule() {
+        presenter = new MainPresenter(); //TODO replace this with injection
+        presenter.setView(this);
+        presenter.setProvider(getApp());
+    }
 
+
+    private void configureCurrenciesSpinner() {
+        BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter, getLayoutInflater());
         currenciesSpinner.setAdapter(adapter);
+        currenciesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void configureCurrenciesRecylcerView() {
@@ -65,7 +81,7 @@ public class MainActivity extends Activity implements MainView {
         GridLayoutManager layoutManger = new GridLayoutManager(this, 2);
 
         currenciesRecyclerView.setLayoutManager(layoutManger);
-        List<CurrencyVM> currencyVMList = LocalGateway.getCurrencies(this);
+        List<CurrencyVM> currencyVMList = getApp().getLocalGateway().getCurrencies();
 
         RecyclerView.Adapter adapter = new CurrenciesCardAdapter(currencyVMList);
         currenciesRecyclerView.setAdapter(adapter);
@@ -136,8 +152,7 @@ public class MainActivity extends Activity implements MainView {
 
 
     public void update(String s) {
-        L.log(this, "update");
-        //testTextView.setText(s);
+
     }
 
     @Override
@@ -147,7 +162,14 @@ public class MainActivity extends Activity implements MainView {
     }
 
     @Override
-    public void update() {
+    public void updateCurrencyList() {
         update("heh");
+    }
+
+    @Override
+    public void updateCurrencySelector() {
+        L.log(this, "updateCurrencySelector");
+        ((BaseAdapter) currenciesSpinner.getAdapter()).notifyDataSetChanged();
+        //testTextView.setText(s);
     }
 }

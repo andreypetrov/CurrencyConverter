@@ -17,15 +17,21 @@ import java.util.List;
  */
 
 public class LocalGateway {
+    Context context;
+
+    public LocalGateway(Context context) {
+        this.context = context;
+    }
 
     //TODO map in presenter remotely pulled objects to local view model representation
-    public static List<CurrencyVM> getCurrencies(Context context) {
+    public List<CurrencyVM> getCurrencies() {
         Resources r = context.getApplicationContext().getResources();
         TypedArray currencyFlags = r.obtainTypedArray(R.array.currency_flags);
         String[] currencyShortNames = r.getStringArray(R.array.currencies_short);
         String[] currencyLongNames = r.getStringArray(R.array.currencies_long);
-        if (!isValid(currencyFlags, currencyShortNames, currencyLongNames))
+        if (!isValid(currencyFlags, currencyShortNames, currencyLongNames)) {
             throw new IllegalStateException("You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!");
+        }
         List<CurrencyVM> currencyVMList = createCurrencyViewModels(currencyFlags, currencyShortNames, currencyLongNames);
         currencyFlags.recycle();
         return currencyVMList;

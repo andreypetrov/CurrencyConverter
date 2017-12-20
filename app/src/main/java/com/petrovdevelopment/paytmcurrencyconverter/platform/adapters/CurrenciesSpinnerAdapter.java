@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,40 +8,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
-
-import java.util.List;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.CurrencySelectorItemView;
 
 /**
  * Created by Andrey on 2017-12-19.
  */
 
 public class CurrenciesSpinnerAdapter extends BaseAdapter {
-    private List<CurrencyVM> currencyVMList;
+    private MainPresenter presenter;
+    private LayoutInflater layoutInflater; //TODO use for picture
 
 
-    public CurrenciesSpinnerAdapter(List<CurrencyVM> currencyVMList) {
-        if (currencyVMList == null) throw new IllegalArgumentException("view model list cannot be null");
-        this.currencyVMList = currencyVMList;
+    public CurrenciesSpinnerAdapter(MainPresenter presenter, LayoutInflater layoutInflater) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return super.getDropDownView(position, convertView, parent);
     }
 
     @Override
     public int getCount() {
-        return currencyVMList.size();
+        return presenter.getCurrenciesCount();
     }
 
     @Override
     public Object getItem(int i) {
-        return currencyVMList.get(i);
+        return presenter.getSpinnerCurrency(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return presenter.getCurrencyId(i);
     }
 
     @Override
@@ -51,15 +54,8 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
         return view;
     }
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return super.getDropDownView(position, convertView, parent);
-    }
-
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CurrencyVM currencyVM = currencyVMList.get(position);
-        holder.flag.setImageDrawable(currencyVM.flagResourceId);
-        holder.shortName.setText(currencyVM.shortName);
+        presenter.configureSpinnerCell(holder, position);
     }
 
     View createView(ViewGroup viewGroup) {
@@ -68,14 +64,24 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
         return view;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView flag;
-        public TextView shortName;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements CurrencySelectorItemView {
+        public ImageView flagView;
+        public TextView shortNameView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            flag = itemView.findViewById(R.id.flag);
-            shortName = itemView.findViewById(R.id.shortName);
+            flagView = itemView.findViewById(R.id.flag);
+            shortNameView = itemView.findViewById(R.id.shortName);
+        }
+
+        @Override
+        public void displayFlag(Drawable flag) {
+            flagView.setImageDrawable(flag);
+        }
+
+        @Override
+        public void displayShortName(String shortName) {
+            shortNameView.setText(shortName);
         }
     }
 
