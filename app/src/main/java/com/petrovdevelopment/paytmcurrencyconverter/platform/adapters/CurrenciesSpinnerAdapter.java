@@ -55,7 +55,7 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.configureSelectorCell(holder, position);
+        presenter.configureSelectorCurrencyItem(holder, position);
     }
 
     View createView(ViewGroup viewGroup) {

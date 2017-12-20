@@ -54,10 +54,6 @@ public class MainPresenter {
 
 
 
-
-
-
-
     /** Callbacks for the view to get the currency selector updated. This allows the view to delegate all "thinking" to the presenter and stay as stupid as possible.
      * From presenter's perspective there is no notion of spinner, as this is an android platform concept.
      * There is only the notion of an abstract selector - something that will allow you to select one of many currencies. View can decide whether this will be done via a selector or something else.
@@ -71,9 +67,30 @@ public class MainPresenter {
     public long getSelectorCurrencyId(int i) {
         return i;
     }
-    public void configureSelectorCell(CurrencySelectorItemView currencySelectorItemView, int position) {
+    public void configureSelectorCurrencyItem(CurrencySelectorItemView currencySelectorItemView, int position) {
         CurrencyVM currencyVM = currencyVMSpinnerList.get(position);
         currencySelectorItemView.displayFlag(currencyVM.flagResourceId);
         currencySelectorItemView.displayShortName(currencyVM.shortName);
     }
+
+
+    /**
+     * Same methods we have for the spinner will be required for the list of currencies on screen. Again, presenter has no idea they are implemented as a grid view, they may be in any other list form.
+     *
+     */
+    public int getListCurrenciesCount() {
+        return currencyVMSpinnerList.size();
+    }
+    public Object getListCurrency(int i) {
+        return currencyVMSpinnerList.get(i);
+    }
+    public long getListCurrencyId(int i) {
+        return i;
+    }
+    public void configureListCurrencyCell(CurrencySelectorItemView currencySelectorItemView, int position) {
+        CurrencyVM currencyVM = currencyVMSpinnerList.get(position);
+        currencySelectorItemView.displayFlag(currencyVM.flagResourceId);
+        currencySelectorItemView.displayShortName(currencyVM.shortName);
+    }
+
 }
