@@ -26,7 +26,6 @@ import okhttp3.Request;
 public class MainActivity extends BaseActivity implements MainView {
     MainPresenter presenter;
     DisposableObserver<String> observer;
-    //ShimmerFrameLayout shimmerContainer;
     ProgressBar progressBar;
     RecyclerView currenciesRecyclerView;
     Spinner currenciesSpinner;
@@ -35,10 +34,9 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //shimmerContainer = (ShimmerFrameLayout) findViewById(R.id.shimmerContainer);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        currenciesRecyclerView  = (RecyclerView) findViewById(R.id.currenciesRecyclerView);
-        currenciesSpinner = (Spinner) findViewById(R.id.currenciesSpinner);
+        progressBar = findViewById(R.id.progressBar);
+        currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
+        currenciesSpinner = findViewById(R.id.currenciesSpinner);
 
         assembleModule();
         configureCurrenciesSpinner();
