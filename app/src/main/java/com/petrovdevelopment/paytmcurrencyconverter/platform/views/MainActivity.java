@@ -12,20 +12,13 @@ import android.widget.Spinner;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesCardAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
 public class MainActivity extends BaseActivity implements MainView {
     MainPresenter presenter;
-    DisposableObserver<String> observer;
+
     ProgressBar progressBar;
     RecyclerView currenciesRecyclerView;
     Spinner currenciesSpinner;
@@ -37,18 +30,16 @@ public class MainActivity extends BaseActivity implements MainView {
         progressBar = findViewById(R.id.progressBar);
         currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
         currenciesSpinner = findViewById(R.id.currenciesSpinner);
-
         assembleModule();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
     }
 
     private void assembleModule() {
-        presenter = new MainPresenter(); //TODO replace this with injection
+        presenter = new MainPresenter(); //TODO replace this with dagger injection if time permits.
         presenter.setView(this);
         presenter.setProvider(getApp());
     }
-
 
     private void configureCurrenciesSpinner() {
         BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter);
@@ -75,8 +66,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void onStart() {
         super.onStart();
-        testRxJava();
-        presenter.viewReady();
+        presenter.onViewStarted();
     }
 
     @Override
@@ -85,58 +75,16 @@ public class MainActivity extends BaseActivity implements MainView {
 
     }
 
-    DisposableObserver<String> createObserver() {
-        return new DisposableObserver<String>() {
-            @Override
-            public void onNext(String s) {
-                update(s);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                update(e.getLocalizedMessage());
-            }
-
-            @Override
-            public void onComplete() {
-                //shimmerContainer.stopShimmerAnimation();
-                progressBar.setIndeterminate(false);
-                progressBar.setVisibility(View.GONE);
-                //todo remove spinner
-                L.log(this, "network call completed");
-            }
-        };
-    }
-
-    //TODO move all that logic deeper into the clean architecture stack
-    private void testRxJava() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("https://api.fixer.io/latest").build();
-
-        //shimmerContainer.startShimmerAnimation();
-        progressBar.setIndeterminate(true);
-        //todo add spinner
-        Observable<String> r = Observable
-                .fromCallable(()-> client.newCall(request).execute())
-                .subscribeOn(Schedulers.io())
-                .map(response -> response.body().string())
-                .observeOn(AndroidSchedulers.mainThread());
-        observer = createObserver();
-        r.subscribe(observer);
-
-    }
-
-
-
-    public void update(String s) {
-
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
-        observer.dispose();
+        presenter.onViewStopped();
     }
+
+
+    /**
+     * Interface methods, exposed to presenter.
+     */
 
     @Override
     public void updateCurrencyList() {
@@ -145,7 +93,16 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void updateCurrencySelector() {
-        L.log(this, "updateCurrencySelector");
         ((BaseAdapter) currenciesSpinner.getAdapter()).notifyDataSetChanged();
+    }
+
+    @Override
+    public void showProgressIndicator() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressIndicator() {
+        progressBar.setVisibility(View.INVISIBLE);//INVISIBLE instead of GONE so that the recycler view does not shift up
     }
 }

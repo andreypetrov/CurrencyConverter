@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.services;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -16,10 +16,10 @@ import java.util.List;
  * Created by Andrey on 2017-12-19.
  */
 
-public class LocalGateway {
+public class LocalRepresentationGateway implements Gateway{
     Context context;
 
-    public LocalGateway(Context context) {
+    public LocalRepresentationGateway(Context context) {
         this.context = context;
     }
 

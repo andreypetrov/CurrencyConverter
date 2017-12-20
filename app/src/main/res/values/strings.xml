@@ -35,7 +35,7 @@
     <string name="zar_short">ZAR</string>
     <string name="isk_short">ISK</string>
 
-    <!--Currency descriptions-->
+    <!-- Currency descriptions-->
     <string name="usd_long">US dollar</string>
     <string name="jpy_long">Japanese yen</string>
     <string name="bgn_long">Bulgarian lev</string>
