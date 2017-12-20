@@ -2,6 +2,9 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform;
 
 import android.app.Application;
 
+import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebEntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 
@@ -10,16 +13,23 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
  */
 
 public class MainApplication extends Application implements MainProvider {
-    XmlLocalGateway localGateway;
-
+    LocalGateway localGateway;
+    EntityGateway entityGateway;
     @Override
     public void onCreate() {
         super.onCreate();
         L.log(this, "hello");
     }
 
-    public XmlLocalGateway getLocalGateway() {
+    @Override
+    public LocalGateway getLocalGateway() {
         if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
+    }
+
+    @Override
+    public EntityGateway getEntityGateway() {
+        if (entityGateway == null) entityGateway = new WebEntityGateway();
+        return entityGateway;
     }
 }

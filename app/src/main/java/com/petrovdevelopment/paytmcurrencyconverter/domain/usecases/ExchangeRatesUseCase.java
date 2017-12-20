@@ -1,10 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.domain.usecases;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.Gateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -13,16 +10,16 @@ import io.reactivex.Observable;
  */
 
 public class ExchangeRatesUseCase implements AsynchronousUseCase<ExchangeRatesResponse>{
-    Gateway gateway;
+    EntityGateway entityGateway;
     String currency;
 
-    public ExchangeRatesUseCase(Gateway gateway, String currency) {
-        this.gateway = gateway;
+    public ExchangeRatesUseCase(EntityGateway entityGateway, String currency) {
+        this.entityGateway = entityGateway;
         this.currency = currency;
     }
 
     @Override
     public Observable<ExchangeRatesResponse> execute() {
-        return gateway.fetchExchangeRates(currency);
+        return entityGateway.fetchExchangeRates(currency);
     }
 }

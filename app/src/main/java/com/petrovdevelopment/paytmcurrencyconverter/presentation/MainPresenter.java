@@ -3,6 +3,7 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
@@ -11,6 +12,11 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalC
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Communication up to view happens only via interfaces. Presenter does not know anything of view implementation logic
@@ -21,9 +27,9 @@ public class MainPresenter {
     private WeakReference<MainView> mainView;
     private MainProvider mainProvider;
 
-
-
     private List<CurrencyVM> selectorCurrencies;
+    private int currentSelectorCurrencyPosition = -1;//TODO optimize not to reload if same currency that has already been there is selected
+
     private List<CurrencyVM> listCurrencies;
 
     private CurrenciesListObserver currenciesListObserver;
@@ -45,23 +51,21 @@ public class MainPresenter {
         L.log(this, "onViewStarted");
         fetchSelectorCurrenciesIfNeeded();
         updateCurrencySelectorView();
-        fetchListCurrenciesIfNeeded();
-        updateCurrencyListView();
     }
 
-    private void fetchListCurrenciesIfNeeded() {
-        if (listCurrencies == null || listCurrencies.size() == 0) fetchListCurrencies();
+    private void fetchListCurrenciesIfNeeded(String currencyShortName) {
+        if (listCurrencies == null || listCurrencies.size() == 0) fetchListCurrencies(currencyShortName);
     }
 
     private void fetchSelectorCurrenciesIfNeeded() {
         if (selectorCurrencies == null || selectorCurrencies.size() == 0) fetchSelectorCurrencies();
     }
 
-    private void fetchListCurrencies() {
-        new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
+    private void fetchListCurrencies(String currencyShortName) {
         showProgressIndicator();
-//            listCurrencies = mainProvider.get().getLocalGateway().getCurrencies(); //TODO use proper network call here
-
+        Observable<ExchangeRatesResponse> exchangeRatesResponseObservable = new ExchangeRatesUseCase(mainProvider.getEntityGateway(), currencyShortName).execute();
+        exchangeRatesResponseObservable.subscribeOn(AndroidSchedulers.mainThread());
+        exchangeRatesResponseObservable.subscribe(System.out::println, Throwable::printStackTrace);
     }
 
     private void fetchSelectorCurrencies() {
@@ -132,7 +136,10 @@ public class MainPresenter {
      * Adapters are part of the view layer
      **/
     public void onSelectorCurrencySelected(int position) {
-        L.log(this, "currency selected: " + selectorCurrencies.get(position).shortName);
+        String currencyShortName = selectorCurrencies.get(position).shortName;
+        L.log(this, "currency selected: " + currencyShortName);
+        fetchListCurrencies(currencyShortName);
+        updateCurrencyListView();
     }
 
     public int getSelectorCurrenciesCount() {

@@ -1,6 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.models;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Andrey on 2017-12-19.
@@ -9,12 +10,12 @@ import java.util.List;
 public class ExchangeRatesResponse {
     private String base;
     private String date;
-    private List<Rate> rates;
+    private Map<String, Double> rates;
 
     public ExchangeRatesResponse() {
     }
 
-    public ExchangeRatesResponse(String base, String date, List<Rate> rates) {
+    public ExchangeRatesResponse(String base, String date, Map<String, Double> rates) {
         this.base = base;
         this.date = date;
         this.rates = rates;
@@ -36,11 +37,20 @@ public class ExchangeRatesResponse {
         this.date = date;
     }
 
-    public List<Rate> getRates() {
+    public Map<String, Double> getRates() {
         return rates;
     }
 
-    public void setRates(List<Rate> rates) {
+    public void setRates(Map<String, Double> rates) {
         this.rates = rates;
+    }
+
+    @Override
+    public String toString() {
+        return "ExchangeRatesResponse{" +
+                "base='" + base + '\'' +
+                ", date='" + date + '\'' +
+                ", rates=" + rates +
+                '}';
     }
 }
