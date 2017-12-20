@@ -1,15 +1,20 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Spinner;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesCardAdapter;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.LocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
@@ -18,47 +23,51 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
-public class MainActivity extends Activity implements MainView{
-    TextView testTextView;
+public class MainActivity extends Activity implements MainView {
     MainPresenter presenter;
     DisposableObserver<String> observer;
     //ShimmerFrameLayout shimmerContainer;
     ProgressBar progressBar;
     RecyclerView currenciesRecyclerView;
+    Spinner currenciesSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        testTextView = (TextView) findViewById(R.id.testTextView);
         //shimmerContainer = (ShimmerFrameLayout) findViewById(R.id.shimmerContainer);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         currenciesRecyclerView  = (RecyclerView) findViewById(R.id.currenciesRecyclerView);
-        testTextView.setText("test");
+        currenciesSpinner = (Spinner) findViewById(R.id.currenciesSpinner);
+
         presenter = new MainPresenter(); //TODO replace this with injection
 
-        //test
+        configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
+    }
+
+    private void configureCurrenciesSpinner() {
+        List<CurrencyVM> currencyVMList = LocalGateway.getCurrencies(this);
+        BaseAdapter adapter = new CurrenciesSpinnerAdapter(currencyVMList);
+
+        currenciesSpinner.setAdapter(adapter);
     }
 
     private void configureCurrenciesRecylcerView() {
         // use a linear layout manager
-        LinearLayoutManager layoutManger = new LinearLayoutManager(this);
+        StaggeredGridLayoutManager layoutManger = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
         currenciesRecyclerView.setLayoutManager(layoutManger);
         List<CurrencyVM> currencyVMList = LocalGateway.getCurrencies(this);
 
-        RecyclerView.Adapter adapter = new CurrenciesAdapter(currencyVMList);
+        RecyclerView.Adapter adapter = new CurrenciesCardAdapter(currencyVMList);
         currenciesRecyclerView.setAdapter(adapter);
 
     }

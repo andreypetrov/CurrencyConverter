@@ -1,6 +1,5 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,18 @@ import android.widget.TextView;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
- *
  * Created by Andrey on 2017-12-19.
  */
 
-class CurrenciesAdapter extends RecyclerView.Adapter<CurrenciesAdapter.ViewHolder> {
-    List<CurrencyVM> currencyVMList;
+public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAdapter.ViewHolder> {
 
-    public CurrenciesAdapter(List<CurrencyVM> currencyVMList) {
+
+    private List<CurrencyVM> currencyVMList;
+
+    public CurrenciesCardAdapter(List<CurrencyVM> currencyVMList) {
         if (currencyVMList == null) throw new IllegalArgumentException("view model list cannot be null");
         this.currencyVMList = currencyVMList;
     }
@@ -49,7 +47,7 @@ class CurrenciesAdapter extends RecyclerView.Adapter<CurrenciesAdapter.ViewHolde
         return currencyVMList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView flag;
         public TextView shortName;
         public TextView longName;

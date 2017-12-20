@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_padding"
+    android:padding="@dimen/card_horizontal_margin"
+    android:clipToPadding="false"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
         android:id="@+id/currencyCard"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/card_shadow"
-
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-
-        app:cardCornerRadius="@dimen/card_corner_radius">
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_shadow">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/card_padding">
+            android:layout_margin="@dimen/card_horizontal_margin">
 
             <!-- First line -->
             <ImageView
                 android:id="@+id/flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_field_margins"
                 android:layout_marginTop="@dimen/card_field_margins"
                 android:src="@drawable/bgn"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,70 +42,67 @@
                 android:layout_marginTop="@dimen/card_field_margins"
                 android:text="@string/bgn_short"
                 android:textSize="@dimen/text_medium"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/flag"
                 app:layout_constraintBottom_toBottomOf="@+id/flag" />
 
             <TextView
                 android:id="@+id/longName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_field_margins"
                 android:layout_marginTop="@dimen/card_field_margins"
-                android:layout_marginEnd="@dimen/card_field_margins"
                 android:text="@string/bgn_long"
                 android:textSize="@dimen/text_small"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/shortName"
-                app:layout_constraintBottom_toBottomOf="@+id/shortName" />
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <!--Second line-->
             <TextView
                 android:id="@+id/exchangeRateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_field_margins"
                 android:layout_marginTop="@dimen/card_field_margins"
                 android:labelFor="@+id/exchangeRate"
                 android:text="@string/exchange_rate_label"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flag" />
+                app:layout_constraintTop_toBottomOf="@id/longName" />
 
             <TextView
                 android:id="@+id/exchangeRate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_field_margins"
-                android:layout_marginTop="@dimen/card_field_margins"
-                android:layout_marginEnd="@dimen/card_field_margins"
+                android:layout_marginStart="@dimen/card_horizontal_margin"
                 android:text="1.35"
                 app:layout_constraintStart_toEndOf="@id/amountLabel"
-                app:layout_constraintTop_toBottomOf="@id/flag" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/exchangeRateLabel" />
 
             <!--Third line-->
             <TextView
                 android:id="@+id/amountLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_field_margins"
                 android:layout_marginTop="@dimen/card_field_margins"
                 android:layout_marginBottom="@dimen/card_field_margins"
                 android:labelFor="@id/amount"
                 android:text="@string/amount_label"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exchangeRateLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/exchangeRate" />
 
             <TextView
                 android:id="@+id/amount"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/card_field_margins"
-                android:layout_marginStart="@dimen/card_field_margins"
-                android:layout_marginTop="@dimen/card_field_margins"
-                android:layout_marginEnd="@dimen/card_field_margins"
-                android:text="23232323232323232.52"
+                android:layout_marginStart="@dimen/card_horizontal_margin"
+                android:text="232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.52"
                 android:maxWidth="@dimen/card_amount_max_width"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/amountLabel"
-                app:layout_constraintTop_toBottomOf="@id/exchangeRateLabel" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/amountLabel" />
 
         </android.support.constraint.ConstraintLayout>
 

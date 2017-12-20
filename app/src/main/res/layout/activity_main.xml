@@ -17,14 +17,12 @@
         android:layout_height="@dimen/input_height"
         android:digits="0123456789."
         android:hint="@string/amount"
-        android:background="@color/teal"
         android:inputType="numberDecimal" />
 
-    <TextView
-        android:id="@+id/testTextView"
+    <Spinner
+        android:id="@+id/currenciesSpinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_height="wrap_content" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -34,16 +32,6 @@
         android:indeterminateOnly="false"
         android:maxHeight="10dip"
         android:minHeight="10dip"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="18dp"
-        android:text="test we are the best.  \u00A9 \u1F1EB \uD83C \uD83C\uDDEB\uD83C\uDDF7 \u127482 \u1f1fa"
-        android:textColor="@color/teal"
-        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/currenciesRecyclerView"

@@ -75,7 +75,7 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="as_of">As of</string>
-    <string name="amount_label">Amount:</string>
+    <string name="amount_label">Amt:</string>
     <string name="exchange_rate_label">Rate:</string>
 
 </resources>
