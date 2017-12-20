@@ -33,23 +33,30 @@ public class MainPresenter {
     }
 
     public void viewReady() {
-
         L.log(this, "viewReady");
         //TODO switch to usecases later and introduce asynchronous updates
 
         loadLocalModels();
-        updateCurrencySelector();
+        updateCurrencySelectorView();
+        updateCurrencyListView();
     }
 
-    private void updateCurrencySelector() {
-        if (mainView.get() == null) return;
-        mainView.get().updateCurrencySelector();
+    private void updateCurrencyListView() {
+        MainView view = mainView.get();
+        if (view != null) view.updateCurrencyList();
+    }
+
+    private void updateCurrencySelectorView() {
+        MainView view = mainView.get();
+        if (view != null) view.updateCurrencySelector();
     }
 
     private void loadLocalModels() {
-        if (mainProvider.get() == null) return;
-        selectorCurrencies = mainProvider.get().getLocalGateway().getCurrencies();
-        listCurrencies = mainProvider.get().getLocalGateway().getCurrencies();//TODO this in the future will happen over network upon selection in the selector
+        MainProvider provider = mainProvider.get();
+        if (provider != null) {
+            selectorCurrencies = mainProvider.get().getLocalGateway().getCurrencies();
+            listCurrencies = mainProvider.get().getLocalGateway().getCurrencies();//TODO this in the future will happen over network upon selection in the selector
+        }
     }
 
 

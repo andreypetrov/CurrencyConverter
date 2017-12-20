@@ -147,6 +147,5 @@ public class MainActivity extends BaseActivity implements MainView {
     public void updateCurrencySelector() {
         L.log(this, "updateCurrencySelector");
         ((BaseAdapter) currenciesSpinner.getAdapter()).notifyDataSetChanged();
-        //testTextView.setText(s);
     }
 }
