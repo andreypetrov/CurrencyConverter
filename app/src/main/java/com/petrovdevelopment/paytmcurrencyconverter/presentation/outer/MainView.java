@@ -7,7 +7,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
  * Created by Andrey on 2017-12-18.
  */
 
-public interface MainView {
+public interface MainView extends BaseView {
     void updateCurrencyList();
     void updateCurrencySelector();
     void showProgressIndicator();

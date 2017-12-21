@@ -45,12 +45,21 @@ public class ExchangeRatesResponse {
         this.rates = rates;
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
     @Override
     public String toString() {
         return "ExchangeRatesResponse{" +
                 "base='" + base + '\'' +
                 ", date='" + date + '\'' +
                 ", rates=" + rates +
+                ", error='" + error + '\'' +
                 '}';
     }
 }

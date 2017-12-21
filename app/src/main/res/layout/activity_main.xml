@@ -24,19 +24,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:indeterminateOnly="true"
-        android:maxHeight="10dip"
-        android:minHeight="10dip"/>
+    <include layout="@layout/progress_bar"/>
 
+    <include layout="@layout/error_view"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <android.support.v7.widget.RecyclerView
         android:id="@+id/currenciesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
-
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </LinearLayout>

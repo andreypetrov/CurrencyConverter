@@ -2,18 +2,16 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterToCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterToCurrenciesPresenterUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapPresenterUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalCurrenciesUseCase;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,24 +74,18 @@ public class MainPresenter {
 
     private void fetchListCurrencies(String currencyShortName) {
         showProgressIndicator();
+        hideError();
         Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getEntityGateway(), currencyShortName).execute()
-                .map(response -> new ConverterToCurrenciesUseCase(response, currencyLookUp, amount).execute())
+                .map(response -> new ConverterToCurrenciesPresenterUseCase(response, currencyLookUp, amount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
         currenciesListObserver = new CurrenciesListObserver(this);
         listCurrenciesObservable.subscribe(currenciesListObserver);
     }
 
-
     private void fetchSelectorCurrencies() {
         selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
-        currencyLookUp = createCurrencyMap(selectorCurrencies);
-    }
-
-    private Map<String, Currency> createCurrencyMap(List<Currency> listCurrencies) {
-        Map<String, Currency> map = new HashMap<>();
-        for (Currency currency : listCurrencies) map.put(currency.shortName, currency);
-        return map;
+        currencyLookUp = new CreateCurrenciesMapPresenterUseCase(selectorCurrencies).execute();
     }
 
     private static class CurrenciesListObserver extends BaseObserver<List<Currency>> {
@@ -112,8 +104,9 @@ public class MainPresenter {
 
         @Override
         public void onError(Throwable e) {
-            L.log(this, "onError" + e.getLocalizedMessage());
-
+            presenter.showError(e.getLocalizedMessage());
+            presenter.listCurrencies.clear(); //We don't want to mislead the user with showing them stale quotes
+            presenter.updateCurrencyListView();
             presenter.hideProgressIndicator();
         }
 
@@ -145,6 +138,17 @@ public class MainPresenter {
         MainView view = mainView.get();
         if (view != null) view.hideProgressIndicator();
     }
+
+    private void showError(String errorMessage) {
+        MainView view = mainView.get();
+        if (view != null) view.showError(errorMessage);
+    }
+
+    private void hideError() {
+        MainView view = mainView.get();
+        if (view != null) view.hideError();
+    }
+
     //endregion
 
 

@@ -8,7 +8,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesCardAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
@@ -17,11 +19,14 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
 import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends BaseActivity implements MainView {
-    MainPresenter presenter;
+    private MainPresenter presenter;
 
-    ProgressBar progressBar;
-    RecyclerView currenciesRecyclerView;
-    Spinner currenciesSpinner;
+    private ProgressBar progressBar;
+    private TextView errorView;
+
+    private RecyclerView currenciesRecyclerView;
+    private Spinner currenciesSpinner;
+    private ShimmerFrameLayout shimmerContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class MainActivity extends BaseActivity implements MainView {
         progressBar = findViewById(R.id.progressBar);
         currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
         currenciesSpinner = findViewById(R.id.currenciesSpinner);
+        shimmerContainer = findViewById(R.id.shimmerContainer);
+        errorView = findViewById(R.id.errorView);
         assembleModule();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
@@ -98,10 +105,26 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showProgressIndicator() {
         progressBar.setVisibility(View.VISIBLE);
+        shimmerContainer.startShimmerAnimation();
     }
 
     @Override
     public void hideProgressIndicator() {
         progressBar.setVisibility(View.INVISIBLE);//INVISIBLE instead of GONE so that the recycler view does not shift up
+        shimmerContainer.stopShimmerAnimation();
     }
+
+    @Override
+    public void showError(String errorMessage) {
+        errorView.setText(errorMessage);
+        errorView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideError() {
+        errorView.setVisibility(View.GONE);
+        errorView.setText("");
+    }
+
+
 }
