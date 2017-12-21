@@ -25,8 +25,8 @@ public class CacheHttpClient implements HttpClient {
     private static final String CONTENT_TYPE_NAME = "Content-Type"; //we could use mediatype for this too
     private static final String CONTENT_TYPE_VALUE_JSON = "application/json; charset=utf-8";
 
-    private static final int DEFAULT_CACHE_SIZE = 5 * 1024 * 1024; // 5MB
-    private static final int DEFAULT_CACHE_AGE_IN_MINUTES = 30;
+    private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024; // 10MB
+    private static final int DEFAULT_CACHE_AGE_IN_MINUTES = 1;
 
     private CacheControl cacheControl;
     private OkHttpClient okHttpClient;
@@ -37,6 +37,7 @@ public class CacheHttpClient implements HttpClient {
     }
 
     /**
+     * Factory method.
      * Create a default http client with cache size of 5MB and stale cache age of 30 min
      * @param context
      * @return
