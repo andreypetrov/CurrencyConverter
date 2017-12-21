@@ -1,8 +1,12 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
+import android.content.Context;
+
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.JsonParser;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.CacheHttpClient;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.HttpClient;
 
 
 import java.io.IOException;
@@ -18,10 +22,10 @@ import okhttp3.Response;
  */
 
 public class WebGateway implements AsynchronousGateway {
-    OkHttpClient client;
+    HttpClient client;
 
-    public WebGateway() {
-        client = new OkHttpClient(); //TODO push okhttp client one lavel deeper
+    public WebGateway(HttpClient client) {
+        this.client = client;
     }
 
     @Override
@@ -52,8 +56,7 @@ public class WebGateway implements AsynchronousGateway {
 
     //TODO add parameter validation in a validator file - should check if it is only alphabetic characters in [A-Z]. No need to check for length probably
     private Response fetchExchangeRatesFromWeb(String currency) throws IOException {
-        Request request = new Request.Builder().url("https://api.fixer.io/latest?base=" + currency).build();
-        Response response = client.newCall(request).execute();
+        Response response = client.get("https://api.fixer.io/latest?base=" + currency);
         return response;
     }
 

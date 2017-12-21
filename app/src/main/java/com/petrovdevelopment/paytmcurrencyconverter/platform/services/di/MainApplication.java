@@ -6,6 +6,8 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.Asynch
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.CacheHttpClient;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.HttpClient;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 
@@ -30,7 +32,8 @@ public class MainApplication extends Application implements MainProvider {
 
     @Override
     public AsynchronousGateway getAsynchronousGateway() {
-        if (asynchronousGateway == null) asynchronousGateway = new WebGateway();
+        HttpClient client = CacheHttpClient.createDefaultClient(this);
+        if (asynchronousGateway == null) asynchronousGateway = new WebGateway(client);
         return asynchronousGateway;
     }
 }
