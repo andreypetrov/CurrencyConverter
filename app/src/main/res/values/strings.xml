@@ -71,7 +71,7 @@
     <string name="zar_long">South African rand</string>
     <string name="isk_long">Icelandic krona</string>
     <!-- UI -->
-    <string name="amount">Please enter an amount</string>
+    <string name="amount">Enter an amount</string>
     <string name="currency">Currency</string>
     <string name="from">From</string>
     <string name="to">To</string>

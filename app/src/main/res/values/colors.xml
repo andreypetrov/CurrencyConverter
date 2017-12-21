@@ -7,9 +7,24 @@
     <color name="yellow_dark">#ffe293</color>
     <color name="yellow_light">#f6f086</color>
     <color name="teal">#00b686</color>
-    <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray">#5d5d5d</color>
     <color name="transparent">#00000000</color>
-    <color name="red">#FF0000</color>
+
+
+    <color name="red">#ff352a</color>
+    <color name="very_dark_blue">#192778</color>
+    <color name="dark_blue">#5768FC</color>
+
+    <color name="blue">#39A7FD</color>
+    <color name="light_blue">#49C4FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="beige">#e0e2e6</color>
+
+    #5768FC
+    39A7FD
+    49C4FF
+
+    #FFFFFF
+    #DEB6A0
 </resources>

@@ -31,7 +31,10 @@ public class MainActivity extends BaseActivity implements MainView {
     private Spinner currenciesSpinner;
     private ShimmerFrameLayout shimmerContainer;
 
+    //TODO fix keyboard on amountView to disappear on Enter
     //View state
+    private static final String AMOUNT_KEY = "amount_key";
+    private static final String CURRENT_SELECTOR_CURRENCY_POSITION_KEY = "current_selector_currency_position_key";
     private String amount;
     private int currentSelectorCurrencyPosition;
 
@@ -45,15 +48,17 @@ public class MainActivity extends BaseActivity implements MainView {
         errorView = findViewById(R.id.errorView);
         currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
         shimmerContainer = findViewById(R.id.shimmerContainer);
-        restoreStateIfNeeded();
+        restoreStateIfNeeded(savedInstanceState);
         assembleModule();
         configureAmountView();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
     }
 
-    private void restoreStateIfNeeded() {
-
+    private void restoreStateIfNeeded(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+//            savedInstanceState.getString()
+        }
     }
 
     private void assembleModule() {

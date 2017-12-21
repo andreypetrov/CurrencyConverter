@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/activity_second_level_margin"
     android:layout_marginTop="@dimen/activity_second_level_margin"
-    android:background="@color/colorAccent"
+    android:background="@color/red"
     android:padding="@dimen/activity_padding"
     android:text="@string/error_generic"
     android:textColor="@color/white"
