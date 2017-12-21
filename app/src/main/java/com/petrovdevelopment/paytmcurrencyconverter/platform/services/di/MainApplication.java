@@ -18,6 +18,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainPr
 public class MainApplication extends Application implements MainProvider {
     private SynchronousGateway localGateway;
     private AsynchronousGateway asynchronousGateway;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,8 +33,10 @@ public class MainApplication extends Application implements MainProvider {
 
     @Override
     public AsynchronousGateway getAsynchronousGateway() {
-        HttpClient client = CacheHttpClient.createDefaultClient(this);
-        if (asynchronousGateway == null) asynchronousGateway = new WebGateway(client);
+        if (asynchronousGateway == null) {
+            HttpClient client = CacheHttpClient.createDefaultClient(this);
+            asynchronousGateway = new WebGateway(client);
+        }
         return asynchronousGateway;
     }
 }
