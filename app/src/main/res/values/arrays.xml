@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="currencies_short">
+        <item>@string/eur_short</item>
         <item>@string/usd_short</item>
         <item>@string/jpy_short</item>
         <item>@string/bgn_short</item>
@@ -37,6 +38,7 @@
     </string-array>
 
     <string-array name="currencies_long">
+        <item>@string/eur_long</item>
         <item>@string/usd_long</item>
         <item>@string/jpy_long</item>
         <item>@string/bgn_long</item>
@@ -72,6 +74,7 @@
     </string-array>
 
     <integer-array name="currency_flags">
+        <item>@drawable/eur</item>
         <item>@drawable/usd</item>
         <item>@drawable/jpy</item>
         <item>@drawable/bgn</item>

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
  * Created by Andrey on 2017-12-20.
  */
 
-public class ModelMapper {
+public class JsonParser {
     static Gson gson = new Gson();
 
     public static ExchangeRatesResponse transformExchangeRatesResponse(String exchangeRatesResponseBody) throws JsonSyntaxException {

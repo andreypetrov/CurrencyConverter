@@ -1,14 +1,13 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.ModelMapper;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.JsonParser;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 
 
 import java.io.IOException;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -31,7 +30,7 @@ public class WebEntityGateway implements EntityGateway {
                 .fromCallable(() -> fetchExchangeRatesFromWeb(currency))
                 .subscribeOn(Schedulers.io())
                 .map(response -> response.body().string())
-                .map(bodyString -> ModelMapper.transformExchangeRatesResponse(bodyString));
+                .map(bodyString -> JsonParser.transformExchangeRatesResponse(bodyString));
         return observable;
 
 //
@@ -39,7 +38,7 @@ public class WebEntityGateway implements EntityGateway {
 //            try {
 //                String exchangeRatesResponseJson = fetchExchangeRatesFromWeb(currency);
 //                if (exchangeRatesResponseJson != null) {
-//                    ExchangeRatesResponse exchangeRatesResponse = ModelMapper.transformExchangeRatesResponse(exchangeRatesResponseJson);
+//                    ExchangeRatesResponse exchangeRatesResponse = JsonParser.transformExchangeRatesResponse(exchangeRatesResponseJson);
 //                    emitter.onNext(exchangeRatesResponse);
 //                    emitter.onComplete();
 //                } else {

@@ -1,8 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
 
 /**
@@ -54,9 +52,9 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CurrencyVM currencyVM = presenter.getSelectorCurrency(position); //alternatively we could call getItem(position) as it does the same, but this would require a cast
-        holder.flagView.setImageDrawable(currencyVM.flag);
-        holder.shortNameView.setText(currencyVM.shortName);
+        Currency currency = presenter.getSelectorCurrency(position); //alternatively we could call getItem(position) as it does the same, but this would require a cast
+        holder.flagView.setImageDrawable(currency.flag);
+        holder.shortNameView.setText(currency.shortName);
     }
 
     View createView(ViewGroup viewGroup) {

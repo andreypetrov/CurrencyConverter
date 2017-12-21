@@ -1,7 +1,5 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
 
-import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
 
 /**
@@ -32,12 +30,12 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CurrencyVM currencyVM = presenter.getListCurrency(position);
-        holder.flagView.setImageDrawable(currencyVM.flag);
-        holder.shortNameView.setText(currencyVM.shortName);
-        holder.longNameView.setText(currencyVM.longName);
-        holder.exchangeRateView.setText(currencyVM.exchangeRate);
-        holder.amountView.setText(currencyVM.amount);
+        Currency currency = presenter.getListCurrency(position);
+        holder.flagView.setImageDrawable(currency.flag);
+        holder.shortNameView.setText(currency.shortName);
+        holder.longNameView.setText(currency.longName);
+        holder.exchangeRateView.setText(currency.exchangeRate);
+        holder.amountView.setText(currency.amount);
     }
 
     @Override

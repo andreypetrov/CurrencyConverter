@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.domain.gateways;
 
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface LocalGateway {
      *  Synchronous fetch
      * @return
      */
-    List<CurrencyVM> getCurrencies();
+    List<Currency> getCurrencies();
 }

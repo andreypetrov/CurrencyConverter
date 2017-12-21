@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.CurrencyVM;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class XmlLocalGateway implements LocalGateway {
      * If we had to optimize then we could pass only resource ids and push the responsibility of retrieving the actual drawables to the adapters. For now let's not optimize prematurely :)
      * @return
      */
-    public List<CurrencyVM> getCurrencies() {
+    public List<Currency> getCurrencies() {
         Resources r = context.getApplicationContext().getResources();
         TypedArray currencyFlags = r.obtainTypedArray(R.array.currency_flags);
         String[] currencyShortNames = r.getStringArray(R.array.currencies_short);
@@ -40,12 +40,12 @@ public class XmlLocalGateway implements LocalGateway {
         return createCurrencyViewModels(currencyFlags, currencyShortNames, currencyLongNames);
     }
 
-    private static List<CurrencyVM> createCurrencyViewModels(TypedArray currencyFlags, String[] currencyShortNames, String[] currencyLongNames) {
-        List<CurrencyVM> currencyVMList = new ArrayList<>();
+    private static List<Currency> createCurrencyViewModels(TypedArray currencyFlags, String[] currencyShortNames, String[] currencyLongNames) {
+        List<Currency> currencyList = new ArrayList<>();
         for (int i = 0; i < currencyFlags.length(); i++) {
-            currencyVMList.add(new CurrencyVM(currencyShortNames[i], currencyLongNames[i], currencyFlags.getDrawable(i)));
+            currencyList.add(new Currency(currencyShortNames[i], currencyLongNames[i], currencyFlags.getDrawable(i)));
         }
-        return currencyVMList;
+        return currencyList;
     }
 
     /**

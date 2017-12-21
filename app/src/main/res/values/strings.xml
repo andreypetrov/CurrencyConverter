@@ -2,6 +2,7 @@
     <string name="app_name">PaytmCurrencyConverter</string>
 
     <!--Currencies - 32, with one invalid, to test network response error(ISK) -->
+    <string name="eur_short">EUR</string>
     <string name="usd_short">USD</string>
     <string name="jpy_short">JPY</string>
     <string name="bgn_short">BGN</string>
@@ -36,6 +37,7 @@
     <string name="isk_short">ISK</string>
 
     <!-- Currency descriptions-->
+    <string name="eur_long">Euro</string>
     <string name="usd_long">US dollar</string>
     <string name="jpy_long">Japanese yen</string>
     <string name="bgn_long">Bulgarian lev</string>
@@ -68,7 +70,6 @@
     <string name="thb_long">Thai baht</string>
     <string name="zar_long">South African rand</string>
     <string name="isk_long">Icelandic krona</string>
-
     <!-- UI -->
     <string name="amount">Please enter an amount</string>
     <string name="currency">Currency</string>
