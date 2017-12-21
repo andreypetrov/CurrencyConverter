@@ -29,7 +29,7 @@ public class Currency {
         this.flag = flag;
         this.shortName = shortName;
         this.longName = longName;
-        exchangeRate = "1.35";
-        amount = "232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.23";
+        exchangeRate = "0.0";
+        amount = "0.0";
     }
 }

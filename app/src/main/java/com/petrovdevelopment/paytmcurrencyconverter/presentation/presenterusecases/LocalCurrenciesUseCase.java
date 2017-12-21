@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;

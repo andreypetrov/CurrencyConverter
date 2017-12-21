@@ -6,7 +6,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGatewa
 import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebEntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
 /**
  * Created by Andrey on 2017-12-18.
@@ -18,7 +18,7 @@ public class MainApplication extends Application implements MainProvider {
     @Override
     public void onCreate() {
         super.onCreate();
-        L.log(this, "hello");
+        Log.log(this, "hello");
     }
 
     @Override

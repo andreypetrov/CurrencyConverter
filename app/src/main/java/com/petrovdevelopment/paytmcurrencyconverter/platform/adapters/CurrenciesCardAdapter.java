@@ -56,7 +56,7 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
             shortNameView = itemView.findViewById(R.id.shortName);
             longNameView = itemView.findViewById(R.id.longName);
             exchangeRateView = itemView.findViewById(R.id.exchangeRate);
-            amountView = itemView.findViewById(R.id.amount);
+            amountView = itemView.findViewById(R.id.amountView);
         }
     }
 }

@@ -12,7 +12,7 @@
     android:focusableInTouchMode="true">
 
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/amountView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/input_height"
         android:digits="0123456789."

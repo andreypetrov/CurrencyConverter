@@ -5,7 +5,6 @@ package com.petrovdevelopment.paytmcurrencyconverter.domain.utils;
  */
 
 public class CurrencyUtils {
-
     public static double convert(double amount, double exchangeRate) {
         return amount*exchangeRate;
     }

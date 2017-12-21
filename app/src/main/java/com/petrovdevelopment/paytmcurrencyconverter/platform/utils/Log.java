@@ -1,11 +1,9 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.utilities;
-
-import android.util.Log;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.utils;
 
 /**
  * Convenience logger on top of Anroid's android.util.Log
  */
-public class L {
+public class Log {
 
     /**
      * Log a message
@@ -13,11 +11,11 @@ public class L {
      * @param message
      */
     public static void log(Object author, String message) {
-        Log.i(author.getClass().getSimpleName(), message);
+        android.util.Log.i(author.getClass().getSimpleName(), message);
     }
 
     public static void log(Object author, boolean b) {
-        Log.i(author.getClass().getSimpleName(), String.valueOf(b));
+        android.util.Log.i(author.getClass().getSimpleName(), String.valueOf(b));
     }
 
     public static void log(Object author, Object object) {

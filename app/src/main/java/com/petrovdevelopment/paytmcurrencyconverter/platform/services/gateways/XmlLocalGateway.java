@@ -19,7 +19,7 @@ import java.util.List;
 
 public class XmlLocalGateway implements LocalGateway {
     Context context;
-
+    private static final String XML_ERROR_MESSAGE = "You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!";
     public XmlLocalGateway(Context context) {
         this.context = context;
     }
@@ -27,6 +27,7 @@ public class XmlLocalGateway implements LocalGateway {
     /**
      * Current use case is simple enough to allow us to keep the flag drawables in our view model.
      * If we had to optimize then we could pass only resource ids and push the responsibility of retrieving the actual drawables to the adapters. For now let's not optimize prematurely :)
+     *
      * @return
      */
     public List<Currency> getCurrencies() {
@@ -35,7 +36,7 @@ public class XmlLocalGateway implements LocalGateway {
         String[] currencyShortNames = r.getStringArray(R.array.currencies_short);
         String[] currencyLongNames = r.getStringArray(R.array.currencies_long);
         if (!isValid(currencyFlags, currencyShortNames, currencyLongNames)) {
-            throw new IllegalStateException("You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!");
+            throw new IllegalStateException(XML_ERROR_MESSAGE);
         }
         return createCurrencyViewModels(currencyFlags, currencyShortNames, currencyLongNames);
     }
@@ -50,6 +51,7 @@ public class XmlLocalGateway implements LocalGateway {
 
     /**
      * Validate we have at least one currency and that data in array.xml is not malformed (i.e. non-matching number of currency flags, short names and long names.
+     * TODO move validation logic out in its own validator class
      *
      * @param currencyFlags
      * @param currencyShortNames
@@ -57,8 +59,7 @@ public class XmlLocalGateway implements LocalGateway {
      * @return true if data in xml is well formed, false if it is malformed
      */
     private static boolean isValid(TypedArray currencyFlags, String[] currencyShortNames, String[] currencyLongNames) {
-        if (currencyFlags == null || currencyShortNames == null || currencyLongNames == null || currencyFlags.length() == 0)
-            return false;
+        if (currencyFlags == null || currencyShortNames == null || currencyLongNames == null || currencyFlags.length() == 0) return false;
         return currencyFlags.length() == currencyShortNames.length && currencyFlags.length() == currencyLongNames.length;
     }
 }

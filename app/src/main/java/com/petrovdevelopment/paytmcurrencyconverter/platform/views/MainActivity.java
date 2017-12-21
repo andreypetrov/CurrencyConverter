@@ -3,9 +3,12 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,7 +19,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.Currencies
 import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
-import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends BaseActivity implements MainView {
     private MainPresenter presenter;
@@ -24,6 +26,7 @@ public class MainActivity extends BaseActivity implements MainView {
     private ProgressBar progressBar;
     private TextView errorView;
 
+    private EditText amountView;
     private RecyclerView currenciesRecyclerView;
     private Spinner currenciesSpinner;
     private ShimmerFrameLayout shimmerContainer;
@@ -32,12 +35,14 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressBar = findViewById(R.id.progressBar);
-        currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
+        amountView = findViewById(R.id.amountView);
         currenciesSpinner = findViewById(R.id.currenciesSpinner);
-        shimmerContainer = findViewById(R.id.shimmerContainer);
+        progressBar = findViewById(R.id.progressBar);
         errorView = findViewById(R.id.errorView);
+        currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
+        shimmerContainer = findViewById(R.id.shimmerContainer);
         assembleModule();
+        configureAmountView();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
     }
@@ -46,6 +51,23 @@ public class MainActivity extends BaseActivity implements MainView {
         presenter = new MainPresenter(getApp()); //TODO replace this with dagger injection if time permits.
         presenter.setView(this);
     }
+
+    private void configureAmountView() {
+        amountView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String s = String.valueOf(charSequence);
+                presenter.onAmountChanged(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
+
 
     private void configureCurrenciesSpinner() {
         BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter);
@@ -62,6 +84,7 @@ public class MainActivity extends BaseActivity implements MainView {
         });
     }
 
+    //TODO add fancy animation on loading if time permits
     private void configureCurrenciesRecylcerView() {
         GridLayoutManager layoutManger = new GridLayoutManager(this, 2);
         currenciesRecyclerView.setLayoutManager(layoutManger);
@@ -72,7 +95,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.onViewStarted();
+        presenter.onViewLoaded();
     }
 
     @Override
@@ -84,9 +107,8 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void onStop() {
         super.onStop();
-        presenter.onViewStopped();
+        presenter.onViewUnloaded();
     }
-
 
     /**
      * Interface methods, exposed to presenter.
@@ -123,7 +145,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void hideError() {
         errorView.setVisibility(View.GONE);
-        errorView.setText("");
     }
 
 

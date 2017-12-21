@@ -3,12 +3,13 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utilities.L;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterToCurrenciesPresenterUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapPresenterUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.ConverterExchangeRateToCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.CreateCurrenciesMapUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.LocalCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.UpdateCurrencyAmountsUseCase;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class MainPresenter {
 
     private CurrenciesListObserver currenciesListObserver;
 
-
+    //TODO persist state
     //State
     private double amount;
     private int currentSelectorCurrencyPosition = -1;//TODO optimize not to reload if same currency that has already been there is selected
@@ -51,14 +52,14 @@ public class MainPresenter {
 
     //region ### view lifecycle callbacks
 
-    public void onViewStarted() {
-        L.log(this, "onViewStarted");
+    public void onViewLoaded() {
+        Log.log(this, "onViewLoaded");
         fetchSelectorCurrenciesIfNeeded();
         updateCurrencySelectorView();
     }
 
     //get rid of the currency list observer when activity is in the background
-    public void onViewStopped() {
+    public void onViewUnloaded() {
         if (currenciesListObserver != null && !currenciesListObserver.isDisposed()) currenciesListObserver.dispose();
     }
 
@@ -76,7 +77,7 @@ public class MainPresenter {
         showProgressIndicator();
         hideError();
         Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getEntityGateway(), currencyShortName).execute()
-                .map(response -> new ConverterToCurrenciesPresenterUseCase(response, currencyLookUp, amount).execute())
+                .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, amount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
         currenciesListObserver = new CurrenciesListObserver(this);
@@ -85,7 +86,17 @@ public class MainPresenter {
 
     private void fetchSelectorCurrencies() {
         selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
-        currencyLookUp = new CreateCurrenciesMapPresenterUseCase(selectorCurrencies).execute();
+        currencyLookUp = new CreateCurrenciesMapUseCase(selectorCurrencies).execute();
+    }
+
+    public void onAmountChanged(String s) {
+        try {
+            amount = Double.valueOf(s);
+        } catch (NumberFormatException e) { //if empty string or another invalid value
+            amount = 0;
+        }
+        new UpdateCurrencyAmountsUseCase(listCurrencies, amount).execute();
+        updateCurrencyListView();
     }
 
     private static class CurrenciesListObserver extends BaseObserver<List<Currency>> {
@@ -97,7 +108,7 @@ public class MainPresenter {
 
         @Override
         public void onNext(List<Currency> listCurrencies) {
-            L.log(this, "onNext");
+            Log.log(this, "onNext");
             presenter.listCurrencies = listCurrencies;
             presenter.updateCurrencyListView();
         }
@@ -161,7 +172,7 @@ public class MainPresenter {
      **/
     public void onSelectorCurrencySelected(int position) {
         String currencyShortName = selectorCurrencies.get(position).shortName;
-        L.log(this, "currency selected: " + currencyShortName);
+        Log.log(this, "currency selected: " + currencyShortName);
         fetchListCurrencies(currencyShortName);
         updateCurrencyListView();
     }
