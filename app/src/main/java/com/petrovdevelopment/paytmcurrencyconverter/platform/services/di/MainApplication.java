@@ -1,12 +1,13 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.services.di;
 
 import android.app.Application;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebEntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 
 /**
  * Created by Andrey on 2017-12-18.

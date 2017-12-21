@@ -1,7 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.presentation.outer;
-
-import com.petrovdevelopment.paytmcurrencyconverter.platform.MainApplication;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui;
 
 /**
  * Created by Andrey on 2017-12-18.

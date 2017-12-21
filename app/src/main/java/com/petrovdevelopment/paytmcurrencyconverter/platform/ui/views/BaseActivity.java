@@ -1,8 +1,8 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.ui.views;
 
 import android.app.Activity;
 
-import com.petrovdevelopment.paytmcurrencyconverter.platform.MainApplication;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.di.MainApplication;
 
 /**
  * Created by Andrey on 2017-12-19.

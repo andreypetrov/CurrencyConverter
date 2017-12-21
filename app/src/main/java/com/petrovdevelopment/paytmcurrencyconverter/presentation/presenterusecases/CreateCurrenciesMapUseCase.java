@@ -1,7 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 
 import java.util.HashMap;
 import java.util.List;

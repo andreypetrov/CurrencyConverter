@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.adapters;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.ui.adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
 
 /**
  * Created by Andrey on 2017-12-19.

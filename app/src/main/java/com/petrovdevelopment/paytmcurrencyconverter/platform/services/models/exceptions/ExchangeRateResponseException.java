@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.services.exceptions;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.exceptions;
 
 /**
  * Created by Andrey on 2017-12-21.

@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.domain.usecases;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 
 import io.reactivex.Observable;

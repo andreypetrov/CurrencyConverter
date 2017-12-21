@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels;
 
 import android.graphics.drawable.Drawable;
 

@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels;
 
 /**
  * Created by Andrey on 2017-12-19.

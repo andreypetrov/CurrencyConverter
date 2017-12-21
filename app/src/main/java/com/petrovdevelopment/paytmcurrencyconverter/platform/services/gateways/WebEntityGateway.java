@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.EntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.JsonParser;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 

@@ -1,11 +1,11 @@
-package com.petrovdevelopment.paytmcurrencyconverter.presentation;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.MainProvider;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.ConverterExchangeRateToCurrenciesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.CreateCurrenciesMapUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.LocalCurrenciesUseCase;

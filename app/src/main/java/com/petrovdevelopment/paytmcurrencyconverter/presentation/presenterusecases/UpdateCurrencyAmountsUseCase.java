@@ -2,11 +2,10 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenteruseca
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * TODO consider a calculated field in the Currency view model, which calculates dynamically new amount based on base amount and exchange rate.

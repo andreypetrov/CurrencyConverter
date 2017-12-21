@@ -5,8 +5,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.gateways.LocalGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.domain.gateways;
+package com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways;
 
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 

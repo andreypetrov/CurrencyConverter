@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.petrovdevelopment.paytmcurrencyconverter.platform.views.MainActivity"
+    tools:context="com.petrovdevelopment.paytmcurrencyconverter.platform.ui.views.MainActivity"
     android:background="@color/yellow_light"
     android:padding="@dimen/activity_padding"
     android:focusable="true"

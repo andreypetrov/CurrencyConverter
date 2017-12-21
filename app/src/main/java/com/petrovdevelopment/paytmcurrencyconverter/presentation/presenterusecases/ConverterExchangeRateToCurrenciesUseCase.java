@@ -2,9 +2,9 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenteruseca
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.exceptions.ExchangeRateResponseException;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.exceptions.ExchangeRateResponseException;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 
 import java.util.ArrayList;

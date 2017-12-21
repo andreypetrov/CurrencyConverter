@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.views;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.ui.views;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesCardAdapter;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.adapters.CurrenciesSpinnerAdapter;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.MainPresenter;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.MainView;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.ui.adapters.CurrenciesCardAdapter;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.ui.adapters.CurrenciesSpinnerAdapter;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
 
 public class MainActivity extends BaseActivity implements MainView {
     private MainPresenter presenter;
