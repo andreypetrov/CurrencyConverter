@@ -2,14 +2,16 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
+
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.ConverterExchangeRateToCurrenciesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.CreateCurrenciesMapUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.LocalCurrenciesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases.UpdateCurrencyAmountsUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterExchangeRateToCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalCurrenciesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.UpdateCurrencyAmountsUseCase;
+
+import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class MainPresenter {
     private void fetchListCurrencies(String currencyShortName) {
         showProgressIndicator();
         hideError();
-        Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getEntityGateway(), currencyShortName).execute()
+        Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getAsynchronousGateway(), currencyShortName).execute()
                 .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, amount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
@@ -85,7 +87,7 @@ public class MainPresenter {
     }
 
     private void fetchSelectorCurrencies() {
-        selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getLocalGateway()).execute();
+        selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getSynchronousGateway()).execute();
         currencyLookUp = new CreateCurrenciesMapUseCase(selectorCurrencies).execute();
     }
 

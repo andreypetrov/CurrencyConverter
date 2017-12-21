@@ -1,6 +1,6 @@
-package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenterusecases;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 
@@ -11,9 +11,9 @@ import java.util.List;
  */
 
 public class LocalCurrenciesUseCase implements SynchronousUseCase<List<Currency>> {
-    private final LocalGateway localGateway;
+    private final SynchronousGateway localGateway;
 
-    public LocalCurrenciesUseCase(LocalGateway localGateway) {
+    public LocalCurrenciesUseCase(SynchronousGateway localGateway) {
         this.localGateway = localGateway;
     }
 

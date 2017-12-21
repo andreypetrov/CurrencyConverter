@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Andrey on 2017-12-19.
  */
 
-public class XmlLocalGateway implements LocalGateway {
+public class XmlLocalGateway implements SynchronousGateway {
     Context context;
     private static final String XML_ERROR_MESSAGE = "You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!";
     public XmlLocalGateway(Context context) {

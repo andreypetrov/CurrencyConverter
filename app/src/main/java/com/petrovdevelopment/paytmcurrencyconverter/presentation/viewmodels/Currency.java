@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
  */
 
 public class Currency {
-    public Drawable flag;
+    public Drawable flag; //TODO replace drawable by resource id to make model view-independent
     public String shortName;
     public String longName;
     public String exchangeRate;

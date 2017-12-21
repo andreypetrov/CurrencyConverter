@@ -5,14 +5,10 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Curr
 import java.util.List;
 
 /**
+ * TODO fix gateway un-clean dependencies. Probably separate vm from base xml types
  * Created by Andrey on 2017-12-20.
  */
 
-public interface LocalGateway {
-
-    /**
-     *  Synchronous fetch
-     * @return
-     */
+public interface SynchronousGateway {
     List<Currency> getCurrencies();
 }

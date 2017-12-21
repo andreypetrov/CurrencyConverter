@@ -2,9 +2,9 @@ package com.petrovdevelopment.paytmcurrencyconverter.platform.services.di;
 
 import android.app.Application;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebEntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
@@ -14,8 +14,8 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainPr
  */
 
 public class MainApplication extends Application implements MainProvider {
-    LocalGateway localGateway;
-    EntityGateway entityGateway;
+    private SynchronousGateway localGateway;
+    private AsynchronousGateway asynchronousGateway;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,14 +23,14 @@ public class MainApplication extends Application implements MainProvider {
     }
 
     @Override
-    public LocalGateway getLocalGateway() {
+    public SynchronousGateway getSynchronousGateway() {
         if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
     }
 
     @Override
-    public EntityGateway getEntityGateway() {
-        if (entityGateway == null) entityGateway = new WebEntityGateway();
-        return entityGateway;
+    public AsynchronousGateway getAsynchronousGateway() {
+        if (asynchronousGateway == null) asynchronousGateway = new WebGateway();
+        return asynchronousGateway;
     }
 }

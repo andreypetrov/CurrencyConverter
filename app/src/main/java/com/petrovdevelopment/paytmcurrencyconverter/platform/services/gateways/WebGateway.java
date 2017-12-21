@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.JsonParser;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
 
@@ -17,10 +17,10 @@ import okhttp3.Response;
  * Created by Andrey on 2017-12-18.
  */
 
-public class WebEntityGateway implements EntityGateway {
+public class WebGateway implements AsynchronousGateway {
     OkHttpClient client;
 
-    public WebEntityGateway() {
+    public WebGateway() {
         client = new OkHttpClient(); //TODO push okhttp client one lavel deeper
     }
 

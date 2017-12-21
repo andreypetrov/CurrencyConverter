@@ -1,14 +1,14 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.EntityGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.LocalGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
 
 /**
  * Created by Andrey on 2017-12-19.
  */
 
 public interface MainProvider {
-    public LocalGateway getLocalGateway();
-    public EntityGateway getEntityGateway();
+    public SynchronousGateway getSynchronousGateway();
+    public AsynchronousGateway getAsynchronousGateway();
 
 }
