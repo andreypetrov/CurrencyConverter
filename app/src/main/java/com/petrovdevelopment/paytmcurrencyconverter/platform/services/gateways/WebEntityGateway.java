@@ -57,50 +57,7 @@ public class WebEntityGateway implements EntityGateway {
         return response;
     }
 
-//
-//    public static class NetworkConnectionException extends Exception {
-//
-//        public NetworkConnectionException() {
-//            super();
-//        }
-//        public NetworkConnectionException(final Throwable cause) {
-//            super(cause);
-//        }
-//        public NetworkConnectionException(String message) {
-//            super(message);
-//        }
-//    }
-
 }
-
-//
-//
-//
-//
-//
-//
-//
-//        Request request = new Request.Builder().url("https://api.fixer.io/latest").build();
-//        Observable<String> r = Observable
-//                    .fromCallable(()-> client.newCall(request).execute())
-//                    .subscribeOn(Schedulers.io())
-//                    .map(response -> response.body().string())
-//                    .observeOn(AndroidSchedulers.mainThread());
-
-
-            //shimmerContainer.startShimmerAnimation();
-
-            //todo add spinner
-//            Observable<String> r = Observable
-//                    .fromCallable(()-> client.newCall(request).execute())
-//                    .subscribeOn(Schedulers.io())
-//                    .map(response -> response.body().string())
-//                    .observeOn(AndroidSchedulers.mainThread());
-
-            //problem is the lifecycle of this observer
-//            DisposableObserver<String> observer;
-//            observer = createObserver(onResponseErrorCallback, onResponseSuccessCallback);
-//            r.subscribe(observer);
 
 
 
