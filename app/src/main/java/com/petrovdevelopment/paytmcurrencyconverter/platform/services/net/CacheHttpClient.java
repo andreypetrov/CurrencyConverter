@@ -26,7 +26,7 @@ public class CacheHttpClient implements HttpClient {
     private static final String CONTENT_TYPE_VALUE_JSON = "application/json; charset=utf-8";
 
     private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024; // 10MB
-    private static final int DEFAULT_CACHE_AGE_IN_MINUTES = 1;
+    private static final int DEFAULT_CACHE_AGE_IN_MINUTES = 30;
 
     private CacheControl cacheControl;
     private OkHttpClient okHttpClient;

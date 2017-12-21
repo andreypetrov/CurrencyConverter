@@ -9,4 +9,6 @@ public interface MainView extends BaseView {
     void updateCurrencySelector();
     void showProgressIndicator();
     void hideProgressIndicator();
+    String getAmount();
+    int getCurrentSelectorCurrencyPosition();
 }

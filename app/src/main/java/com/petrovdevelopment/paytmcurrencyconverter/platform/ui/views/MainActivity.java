@@ -31,6 +31,10 @@ public class MainActivity extends BaseActivity implements MainView {
     private Spinner currenciesSpinner;
     private ShimmerFrameLayout shimmerContainer;
 
+    //View state
+    private String amount;
+    private int currentSelectorCurrencyPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +45,15 @@ public class MainActivity extends BaseActivity implements MainView {
         errorView = findViewById(R.id.errorView);
         currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
         shimmerContainer = findViewById(R.id.shimmerContainer);
+        restoreStateIfNeeded();
         assembleModule();
         configureAmountView();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
+    }
+
+    private void restoreStateIfNeeded() {
+
     }
 
     private void assembleModule() {
@@ -59,8 +68,8 @@ public class MainActivity extends BaseActivity implements MainView {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String s = String.valueOf(charSequence);
-                presenter.onAmountChanged(s);
+                amount = String.valueOf(charSequence);
+                presenter.onAmountChanged(amount);
             }
 
             @Override
@@ -75,6 +84,7 @@ public class MainActivity extends BaseActivity implements MainView {
         currenciesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    currentSelectorCurrencyPosition = position;
                     presenter.onSelectorCurrencySelected(position);
             }
             @Override
@@ -113,6 +123,16 @@ public class MainActivity extends BaseActivity implements MainView {
     /**
      * Interface methods, exposed to presenter.
      */
+    @Override
+    public String getAmount() {
+        return amount;
+    }
+
+    @Override
+    public int getCurrentSelectorCurrencyPosition() {
+        return currentSelectorCurrencyPosition;
+    }
+
 
     @Override
     public void updateCurrencyList() {
