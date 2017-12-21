@@ -117,6 +117,8 @@ public class MainPresenter {
 
         @Override
         public void onError(Throwable e) {
+            //in an actual app this message should be converted in a more customer friendly message,
+            // using a localized string and possibly assigning it an error code which can help phone support to investigate if customers are calling with complains
             presenter.showError(e.getLocalizedMessage());
             presenter.listCurrencies.clear(); //We don't want to mislead the user with showing them stale quotes
             presenter.updateCurrencyListView();
