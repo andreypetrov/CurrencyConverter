@@ -5,6 +5,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRate
 
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterExchangeRateToCurrenciesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapUseCase;
@@ -13,7 +14,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.Update
 
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +23,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Communication up to view happens only via interfaces. Presenter does not know anything of view implementation logic
+ *
+ * We have couple of options how to store Presenter - persist it even after activity is destroyed, in which case we can only store weakreference to view,
+ * or make it live and die with Activity, in which case we can avoid the weak referencing.
+ * Living and dying with view implies that persistence is going to happen only on a gateway/services layer based on in memory and file caching. Current implementation has only file caching.
+ *
  * Created by Andrey on 2017-12-18.
  */
 
 public class MainPresenter {
-    private WeakReference<MainView> mainView;
+    private MainView mainView;
     private MainProvider mainProvider;
 
     private List<Currency> selectorCurrencies;
@@ -36,14 +41,11 @@ public class MainPresenter {
 
     private CurrenciesListObserver currenciesListObserver;
 
-    //TODO persist state
-    //State
-    private double amount;
-    private int currentSelectorCurrencyPosition = -1;//TODO optimize not to reload if same currency that has already been there is selected
+    //TODO optimize not to reload if same currency that has already been there is selected
 
 
     public void setView(MainView mainView) {
-        this.mainView = new WeakReference<>(mainView);
+        this.mainView = mainView;
     }
 
     public MainPresenter(MainProvider mainProvider) {
@@ -56,7 +58,7 @@ public class MainPresenter {
 
     public void onViewLoaded() {
         Log.log(this, "onViewLoaded");
-        fetchSelectorCurrenciesIfNeeded();
+        fetchSelectorCurrencies();
         updateCurrencySelectorView();
     }
 
@@ -67,19 +69,12 @@ public class MainPresenter {
 
     //endregion
 
-    private void fetchListCurrenciesIfNeeded(String currencyShortName) {
-        if (listCurrencies == null || listCurrencies.size() == 0) fetchListCurrencies(currencyShortName);
-    }
-
-    private void fetchSelectorCurrenciesIfNeeded() {
-        if (selectorCurrencies == null || selectorCurrencies.size() == 0) fetchSelectorCurrencies();
-    }
-
     private void fetchListCurrencies(String currencyShortName) {
-        showProgressIndicator();
-        hideError();
+        showProgressIndicatorView();
+        hideErrorView();
+        Double currentAmount = PresenterUtils.amountToDouble(mainView.getAmount());
         Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getAsynchronousGateway(), currencyShortName).execute()
-                .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, amount).execute())
+                .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, currentAmount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
         currenciesListObserver = new CurrenciesListObserver(this);
@@ -91,13 +86,10 @@ public class MainPresenter {
         currencyLookUp = new CreateCurrenciesMapUseCase(selectorCurrencies).execute();
     }
 
-    public void onAmountChanged(String s) {
-        try {
-            amount = Double.valueOf(s);
-        } catch (NumberFormatException e) { //if empty string or another invalid value
-            amount = 0;
-        }
-        new UpdateCurrencyAmountsUseCase(listCurrencies, amount).execute();
+
+
+    public void onAmountChanged(String amount) {
+        new UpdateCurrencyAmountsUseCase(listCurrencies, PresenterUtils.amountToDouble(amount)).execute();
         updateCurrencyListView();
     }
 
@@ -119,49 +111,44 @@ public class MainPresenter {
         public void onError(Throwable e) {
             //in an actual app this message should be converted in a more customer friendly message,
             // using a localized string and possibly assigning it an error code which can help phone support to investigate if customers are calling with complains
-            presenter.showError(e.getLocalizedMessage());
+            presenter.showErrorView(e.getLocalizedMessage());
             presenter.listCurrencies.clear(); //We don't want to mislead the user with showing them stale quotes
             presenter.updateCurrencyListView();
-            presenter.hideProgressIndicator();
+            presenter.hideProgressIndicatorView();
         }
 
         @Override
         public void onComplete() {
-            presenter.hideProgressIndicator();
+            presenter.hideProgressIndicatorView();
         }
     }
 
 
-    //region ### view updates
+
+    //region ### view updates. Redundant if we keep strong reference to view. We would have to add null checks to them otherwise
 
     private void updateCurrencyListView() {
-        MainView view = mainView.get();
-        if (view != null) view.updateCurrencyList();
+        mainView.updateCurrencyList();
     }
 
     private void updateCurrencySelectorView() {
-        MainView view = mainView.get();
-        if (view != null) view.updateCurrencySelector();
+        mainView.updateCurrencySelector();
     }
 
-    private void showProgressIndicator() {
-        MainView view = mainView.get();
-        if (view != null) view.showProgressIndicator();
+    private void showProgressIndicatorView() {
+        mainView.showProgressIndicator();
     }
 
-    private void hideProgressIndicator() {
-        MainView view = mainView.get();
-        if (view != null) view.hideProgressIndicator();
+    private void hideProgressIndicatorView() {
+        mainView.hideProgressIndicator();
     }
 
-    private void showError(String errorMessage) {
-        MainView view = mainView.get();
-        if (view != null) view.showError(errorMessage);
+    private void showErrorView(String errorMessage) {
+        mainView.showError(errorMessage);
     }
 
-    private void hideError() {
-        MainView view = mainView.get();
-        if (view != null) view.hideError();
+    private void hideErrorView() {
+        mainView.hideError();
     }
 
     //endregion

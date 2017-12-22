@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.ui.adapters.CurrenciesCardAdapter;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.ui.adapters.CurrenciesSpinnerAdapter;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.ui.viewmodel.MainActivityState;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
 
@@ -31,12 +33,11 @@ public class MainActivity extends BaseActivity implements MainView {
     private Spinner currenciesSpinner;
     private ShimmerFrameLayout shimmerContainer;
 
+
+    //TODO simplify card view to improve scrolling?
     //TODO fix keyboard on amountView to disappear on Enter
-    //View state
-    private static final String AMOUNT_KEY = "amount_key";
-    private static final String CURRENT_SELECTOR_CURRENCY_POSITION_KEY = "current_selector_currency_position_key";
-    private String amount;
-    private int currentSelectorCurrencyPosition;
+
+    private MainActivityState viewState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +47,28 @@ public class MainActivity extends BaseActivity implements MainView {
         currenciesSpinner = findViewById(R.id.currenciesSpinner);
         progressBar = findViewById(R.id.progressBar);
         errorView = findViewById(R.id.errorView);
-        currenciesRecyclerView  = findViewById(R.id.currenciesRecyclerView);
+        currenciesRecyclerView = findViewById(R.id.currenciesRecyclerView);
         shimmerContainer = findViewById(R.id.shimmerContainer);
-        restoreStateIfNeeded(savedInstanceState);
+
+
         assembleModule();
         configureAmountView();
         configureCurrenciesSpinner();
         configureCurrenciesRecylcerView();
+
+        initViewState(savedInstanceState);
     }
 
-    private void restoreStateIfNeeded(Bundle savedInstanceState) {
+    /**
+     * Recover previous state if such exists, else create new state
+     *
+     * @param savedInstanceState
+     */
+    private void initViewState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-//            savedInstanceState.getString()
+            viewState = MainActivityState.createFromBundle(savedInstanceState);
+        } else {
+            viewState = new MainActivityState("", 0);
         }
     }
 
@@ -73,8 +84,8 @@ public class MainActivity extends BaseActivity implements MainView {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                amount = String.valueOf(charSequence);
-                presenter.onAmountChanged(amount);
+                viewState.setAmount(String.valueOf(charSequence));
+                presenter.onAmountChanged(viewState.getAmount());
             }
 
             @Override
@@ -82,16 +93,16 @@ public class MainActivity extends BaseActivity implements MainView {
         });
     }
 
-
     private void configureCurrenciesSpinner() {
         BaseAdapter adapter = new CurrenciesSpinnerAdapter(presenter);
         currenciesSpinner.setAdapter(adapter);
         currenciesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    currentSelectorCurrencyPosition = position;
-                    presenter.onSelectorCurrencySelected(position);
+                viewState.setCurrentSelectorPosition(position);
+                presenter.onSelectorCurrencySelected(viewState.getCurrentSelectorPosition());
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
@@ -125,19 +136,24 @@ public class MainActivity extends BaseActivity implements MainView {
         presenter.onViewUnloaded();
     }
 
-    /**
-     * Interface methods, exposed to presenter.
-     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        viewState.storeToBundle(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+
+    //region ### MainView interface
+
     @Override
     public String getAmount() {
-        return amount;
+        return viewState.getAmount();
     }
 
     @Override
     public int getCurrentSelectorCurrencyPosition() {
-        return currentSelectorCurrencyPosition;
+        return viewState.getCurrentSelectorPosition();
     }
-
 
     @Override
     public void updateCurrencyList() {
@@ -171,6 +187,7 @@ public class MainActivity extends BaseActivity implements MainView {
     public void hideError() {
         errorView.setVisibility(View.GONE);
     }
+    //endregion
 
 
 }

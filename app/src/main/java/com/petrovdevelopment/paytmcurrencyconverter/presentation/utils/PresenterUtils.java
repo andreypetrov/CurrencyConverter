@@ -13,4 +13,12 @@ public class PresenterUtils {
     public static String toString(Double d) {
         return String.format(Locale.getDefault(),"%.2f",d);
     }
+
+    public static Double amountToDouble(String amount) {
+        try {
+            return Double.valueOf(amount);
+        } catch (NumberFormatException e) { //if empty string or another invalid value
+            return 0.0d;
+        }
+    }
 }

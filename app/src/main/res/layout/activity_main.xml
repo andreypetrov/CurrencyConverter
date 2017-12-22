@@ -18,7 +18,8 @@
         android:layout_height="@dimen/input_height"
         android:digits="0123456789."
         android:hint="@string/amount"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:imeOptions="actionDone"/>
 
     <Spinner
         android:id="@+id/currenciesSpinner"
