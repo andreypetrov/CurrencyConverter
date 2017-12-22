@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity implements MainView {
     private TextView dateView;
 
     //TODO simplify card view to improve scrolling?
-    //TODO fix keyboard on amountView to disappear on Enter
 
     private MainActivityState viewState;
 

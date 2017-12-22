@@ -8,8 +8,8 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.Presenter
 import java.util.List;
 
 /**
- * TODO consider a calculated field in the Currency view model, which calculates dynamically new amount based on base amount and exchange rate.
  * Created by Andrey on 2017-12-21.
+ * Coding is fun!
  */
 
 public class UpdateCurrencyAmountsUseCase implements SynchronousUseCase<Void> {
