@@ -33,8 +33,6 @@ public class MainActivity extends BaseActivity implements MainView {
     private ShimmerFrameLayout shimmerContainer;
     private TextView dateView;
 
-    //TODO simplify card view to improve scrolling?
-
     private MainActivityState viewState;
 
     @Override
