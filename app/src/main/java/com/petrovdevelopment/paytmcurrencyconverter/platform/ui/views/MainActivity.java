@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -54,15 +53,14 @@ public class MainActivity extends BaseActivity implements MainView {
         assembleModule();
         configureAmountView();
         configureCurrenciesSpinner();
-        configureCurrenciesRecylcerView();
+        configureCurrenciesRecyclerView();
 
         initViewState(savedInstanceState);
     }
 
     /**
      * Recover previous state if such exists, else create new state
-     *
-     * @param savedInstanceState
+     * @param savedInstanceState previous state or null
      */
     private void initViewState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
@@ -111,7 +109,7 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     //TODO add fancy animation on loading if time permits
-    private void configureCurrenciesRecylcerView() {
+    private void configureCurrenciesRecyclerView() {
         GridLayoutManager layoutManger = new GridLayoutManager(this, 2);
         currenciesRecyclerView.setLayoutManager(layoutManger);
         RecyclerView.Adapter adapter = new CurrenciesCardAdapter(presenter);
@@ -142,11 +140,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public String getAmount() {
         return viewState.getAmount();
-    }
-
-    @Override
-    public int getCurrentSelectorCurrencyPosition() {
-        return viewState.getCurrentSelectorPosition();
     }
 
     @Override

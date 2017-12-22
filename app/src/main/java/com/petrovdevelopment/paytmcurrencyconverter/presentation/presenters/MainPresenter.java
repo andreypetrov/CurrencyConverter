@@ -22,7 +22,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 /**
  * Communication up to view happens only via interfaces. Presenter does not know anything of view implementation logic
  *
- * We have couple of options how to store Presenter - persist it even after activity is destroyed, in which case we can only store weakreference to view,
+ * We have couple of options how to store Presenter - persist it even after activity is destroyed, in which case we can only store weak reference to view,
  * or make it live and die with Activity, in which case we can avoid the weak referencing.
  * Living and dying with view implies that persistence is going to happen only on a gateway/services layer based on in memory and file caching. Current implementation has only file caching.
  *

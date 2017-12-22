@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Created by Andrey on 2017-12-19.
+ * Coding is fun!
  */
 
 public class ExchangeRatesResponse {
@@ -13,12 +14,6 @@ public class ExchangeRatesResponse {
     private String error;
 
     public ExchangeRatesResponse() {
-    }
-
-    public ExchangeRatesResponse(String base, String date, Map<String, Double> rates) {
-        this.base = base;
-        this.date = date;
-        this.rates = rates;
     }
 
     public String getBase() {

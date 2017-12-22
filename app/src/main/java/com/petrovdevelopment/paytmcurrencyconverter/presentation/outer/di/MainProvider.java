@@ -1,7 +1,5 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
 
 /**

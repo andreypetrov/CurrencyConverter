@@ -28,7 +28,7 @@ public class XmlLocalGateway implements SynchronousGateway {
      * Current use case is simple enough to allow us to keep the flag drawables in our view model.
      * If we had to optimize then we could pass only resource ids and push the responsibility of retrieving the actual drawables to the adapters. For now let's not optimize prematurely :)
      *
-     * @return
+     * @return list of currencies
      */
     public List<Currency> getCurrencies() {
         Resources r = context.getApplicationContext().getResources();
@@ -53,13 +53,13 @@ public class XmlLocalGateway implements SynchronousGateway {
      * Validate we have at least one currency and that data in array.xml is not malformed (i.e. non-matching number of currency flags, short names and long names.
      * TODO move validation logic out in its own validator class
      *
-     * @param currencyFlags
-     * @param currencyShortNames
-     * @param currencyLongNames
+     * @param currencyFlags array of currency flags
+     * @param currencyShortNames array of short names
+     * @param currencyLongNames array of long names
      * @return true if data in xml is well formed, false if it is malformed
      */
     private static boolean isValid(TypedArray currencyFlags, String[] currencyShortNames, String[] currencyLongNames) {
-        if (currencyFlags == null || currencyShortNames == null || currencyLongNames == null || currencyFlags.length() == 0) return false;
-        return currencyFlags.length() == currencyShortNames.length && currencyFlags.length() == currencyLongNames.length;
+        return currencyFlags != null && currencyShortNames != null && currencyLongNames != null && currencyFlags.length() > 0
+                && currencyFlags.length() == currencyShortNames.length && currencyFlags.length() == currencyLongNames.length;
     }
 }

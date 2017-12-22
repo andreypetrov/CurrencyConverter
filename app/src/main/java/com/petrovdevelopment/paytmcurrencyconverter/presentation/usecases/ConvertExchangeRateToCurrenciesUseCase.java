@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * Created by Andrey on 2017-12-20.
+ * Coding is fun!
  */
 
 public class ConvertExchangeRateToCurrenciesUseCase implements SynchronousUseCase<CurrenciesWithTimestamp> {

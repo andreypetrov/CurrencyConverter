@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 /**
  * Created by Andrey on 2017-12-19.
+ * Coding is fun!
  */
 
 public class Currency {

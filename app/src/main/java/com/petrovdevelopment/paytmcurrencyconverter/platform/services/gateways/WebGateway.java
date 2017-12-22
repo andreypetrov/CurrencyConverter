@@ -29,8 +29,14 @@ public class WebGateway implements AsynchronousGateway {
         return Observable
                 .fromCallable(() -> fetchExchangeRatesFromWeb(currency))
                 .subscribeOn(Schedulers.io())
-                .map(response -> response.body().string())
+                .map(this::stringFromBody)
                 .map(JsonParser::transformExchangeRatesResponse);
+    }
+
+    @SuppressWarnings("ConstantConditions") //as per Jack Wharton's reply, since the method returned by execute will be always non-null.
+    private String stringFromBody(Response response) throws IOException {
+        if (response.body()!= null) return response.body().string();
+        return "";
     }
 
     //TODO add parameter validation in a validator file - should check if it is only alphabetic characters in [A-Z]. No need to check for length probably

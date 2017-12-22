@@ -1,25 +1,16 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.utils;
 
 /**
- * Convenience logger on top of Anroid's android.util.Log
+ * Convenience logger on top of Android's android.util.Log
  */
 public class Log {
 
     /**
-     * Log a message
+     * Log a message. Convenience method, which allow us not to worry about declaring tags everywhere
      * @param author - usually the class you are calling from. It will be written in the console
-     * @param message
+     * @param message - message to be printed in the android logcat console
      */
     public static void log(Object author, String message) {
         android.util.Log.i(author.getClass().getSimpleName(), message);
-    }
-
-    public static void log(Object author, boolean b) {
-        android.util.Log.i(author.getClass().getSimpleName(), String.valueOf(b));
-    }
-
-    public static void log(Object author, Object object) {
-        String message = (object == null ? "null" : object.toString());
-        log(author, message);
     }
 }

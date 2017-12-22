@@ -15,6 +15,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.Main
 
 /**
  * Created by Andrey on 2017-12-19.
+ * Coding is fun!
  */
 
 public class CurrenciesSpinnerAdapter extends BaseAdapter {

@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Created by Andrey on 2017-12-21.
+ * Coding is fun!
  */
 
 public class CreateCurrenciesMapUseCase implements SynchronousUseCase<Map<String, Currency>> {

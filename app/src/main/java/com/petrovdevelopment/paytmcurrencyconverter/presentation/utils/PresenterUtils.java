@@ -1,11 +1,10 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.utils;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
-
 import java.util.Locale;
 
 /**
  * Created by Andrey on 2017-12-21.
+ * Coding is fun!
  */
 
 public class PresenterUtils {

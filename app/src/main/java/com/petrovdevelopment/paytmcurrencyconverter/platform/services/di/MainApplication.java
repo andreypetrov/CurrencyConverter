@@ -14,6 +14,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainPr
 
 /**
  * Created by Andrey on 2017-12-18.
+ * Coding is fun!
  */
 
 public class MainApplication extends Application implements MainProvider {
@@ -27,12 +28,12 @@ public class MainApplication extends Application implements MainProvider {
         Log.log(this, "hello");
     }
 
-    public SynchronousGateway getSynchronousGateway() {
+    private SynchronousGateway getSynchronousGateway() {
         if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
     }
 
-    public AsynchronousGateway getAsynchronousGateway() {
+    private AsynchronousGateway getAsynchronousGateway() {
         if (asynchronousGateway == null) {
             HttpClient client = CacheHttpClient.createDefaultClient(this);
             asynchronousGateway = new WebGateway(client);
