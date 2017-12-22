@@ -8,8 +8,8 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainVi
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.PresentationUseCaseFactory;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
 import java.util.ArrayList;
@@ -100,8 +100,6 @@ public class MainPresenter {
 
 
     //region ### view updates. Redundant if we keep strong reference to view. We would have to add null checks to them otherwise
-
-
 
     public void updateCurrencyListView() {
         mainView.updateCurrencyList();

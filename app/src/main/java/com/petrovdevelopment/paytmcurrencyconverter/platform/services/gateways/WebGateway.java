@@ -1,7 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.JsonParser;
+import com.petrovdevelopment.paytmcurrencyconverter.platform.services.parsers.JsonParser;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.models.ExchangeRatesResponse;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.HttpClient;
 

@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.services;
+package com.petrovdevelopment.paytmcurrencyconverter.platform.services.parsers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
