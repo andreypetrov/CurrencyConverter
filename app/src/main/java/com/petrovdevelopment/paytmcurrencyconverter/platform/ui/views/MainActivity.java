@@ -70,8 +70,7 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     private void assembleModule() {
-        presenter = new MainPresenter(getApp()); //TODO replace this with dagger injection if time permits.
-        presenter.setView(this);
+        presenter = new MainPresenter(getApp(), this); //TODO replace this with dagger injection if time permits.
     }
 
     private void configureAmountView() {

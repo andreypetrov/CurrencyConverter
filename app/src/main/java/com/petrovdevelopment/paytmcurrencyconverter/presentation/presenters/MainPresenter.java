@@ -32,20 +32,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class MainPresenter {
     private MainView mainView;
     private final DomainUseCaseFactory domainUseCaseFactory;
+
     private List<Currency> selectorCurrencies;
     private Map<String, Currency> currencyLookUp;
     private List<Currency> listCurrencies;
 
     private CurrenciesListObserver currenciesListObserver;
 
-    //TODO optimize not to reload if same currency that has already been there is selected
-
-
-    public void setView(MainView mainView) {
+    public MainPresenter(MainProvider mainProvider, MainView mainView) {
         this.mainView = mainView;
-    }
-
-    public MainPresenter(MainProvider mainProvider) {
         domainUseCaseFactory = mainProvider.getDomainUseCaseFactory();
         selectorCurrencies = new ArrayList<>();
         listCurrencies = new ArrayList<>();
