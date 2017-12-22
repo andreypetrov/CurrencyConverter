@@ -48,13 +48,4 @@ public class ExchangeRatesResponse {
         this.error = error;
     }
 
-    @Override
-    public String toString() {
-        return "ExchangeRatesResponse{" +
-                "base='" + base + '\'' +
-                ", date='" + date + '\'' +
-                ", rates=" + rates +
-                ", error='" + error + '\'' +
-                '}';
-    }
 }

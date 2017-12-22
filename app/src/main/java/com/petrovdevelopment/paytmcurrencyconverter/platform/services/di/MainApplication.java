@@ -22,12 +22,10 @@ public class MainApplication extends Application implements MainProvider {
     private AsynchronousGateway asynchronousGateway;
     private DomainUseCaseFactory domainUseCaseFactory;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.log(this, "hello");
-    }
-
+    /**
+     * Lazy loading, just to demonstrate pattern. Otherwise it would be better to greedily initialize in the onCreate of the application.
+     * @return gateway for synchronous requests
+     */
     private SynchronousGateway getSynchronousGateway() {
         if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
