@@ -1,6 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.observers.CurrenciesListObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
@@ -8,8 +9,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainVi
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.PresentationUseCaseFactory;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
-
-import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import java.util.ArrayList;
 import java.util.List;
