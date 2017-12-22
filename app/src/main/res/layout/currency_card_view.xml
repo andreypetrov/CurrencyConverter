@@ -29,6 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bgn"
+                android:contentDescription="@string/flag"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_field_margins"
-                android:text="DFASDFASDsasdasdasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasadfasdfasdfasdfasdfasdfasdfaafasdfadfasdfasdfasdf"
+                android:text="@string/bgn_long"
                 android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/shortName"
@@ -70,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_horizontal_margin"
-                android:text="1.35"
+                android:text=""
                 app:layout_constraintBottom_toBottomOf="@id/exchangeRateLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/exchangeRateLabel" />
@@ -92,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_horizontal_margin"
                 android:maxWidth="@dimen/card_amount_max_width"
-                android:text="232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.52"
+                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/amountLabel"
                 app:layout_constraintTop_toTopOf="@id/amountLabel" />

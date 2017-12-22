@@ -1,8 +1,10 @@
 package com.petrovdevelopment.paytmcurrencyconverter.platform.ui.viewmodel;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 /**
+ * Contains state which is only very specific to the view. The actual responses are kept on presenter level
  * Created by Andrey on 2017-12-21.
  */
 
@@ -18,11 +20,11 @@ public class MainActivityState {
         this.currentSelectorPosition = currentSelectorPosition;
     }
 
+    @NonNull
     public static MainActivityState createFromBundle(Bundle savedInstanceState) {
         String amount = savedInstanceState.getString(AMOUNT_KEY);
         int currentSelectorCurrencyPosition = savedInstanceState.getInt(CURRENT_SELECTOR_POSITION_KEY);
-        MainActivityState mainActivityState = new MainActivityState(amount, currentSelectorCurrencyPosition);
-        return mainActivityState;
+        return new MainActivityState(amount, currentSelectorCurrencyPosition);
     }
 
     public void storeToBundle(Bundle bundle) {

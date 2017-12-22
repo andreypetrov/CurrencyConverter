@@ -6,6 +6,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRate
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterExchangeRateToCurrenciesUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapUseCase;
@@ -73,7 +74,7 @@ public class MainPresenter {
         showProgressIndicatorView();
         hideErrorView();
         Double currentAmount = PresenterUtils.amountToDouble(mainView.getAmount());
-        Observable<List<Currency>> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getAsynchronousGateway(), currencyShortName).execute()
+        Observable<CurrenciesWithTimestamp> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getAsynchronousGateway(), currencyShortName).execute()
                 .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, currentAmount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
@@ -93,7 +94,7 @@ public class MainPresenter {
         updateCurrencyListView();
     }
 
-    private static class CurrenciesListObserver extends BaseObserver<List<Currency>> {
+    private static class CurrenciesListObserver extends BaseObserver<CurrenciesWithTimestamp> {
         MainPresenter presenter;
 
         public CurrenciesListObserver(MainPresenter presenter) {
@@ -101,10 +102,11 @@ public class MainPresenter {
         }
 
         @Override
-        public void onNext(List<Currency> listCurrencies) {
+        public void onNext(CurrenciesWithTimestamp currenciesWithTimestamp) {
             Log.log(this, "onNext");
-            presenter.listCurrencies = listCurrencies;
+            presenter.listCurrencies = currenciesWithTimestamp.currencies;
             presenter.updateCurrencyListView();
+            presenter.updateDate(currenciesWithTimestamp.date);
         }
 
         @Override
@@ -151,6 +153,9 @@ public class MainPresenter {
         mainView.hideError();
     }
 
+    private void updateDate(String date) {
+        mainView.updateDate(date);
+    }
     //endregion
 
 

@@ -6,9 +6,10 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.services.di.MainApp
 
 /**
  * Created by Andrey on 2017-12-19.
+ * Coding is fun!
  */
 
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity {
 
     /**
      * Convenience method to access the application object without casting every time

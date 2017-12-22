@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.petrovdevelopment.paytmcurrencyconverter.platform.ui.views.MainActivity"
-    android:background="@color/beige"
     android:padding="@dimen/activity_padding"
     android:focusable="true"
 
     android:focusableInTouchMode="true">
+
 
     <EditText
         android:id="@+id/amountView"
@@ -19,12 +19,21 @@
         android:digits="0123456789."
         android:hint="@string/amount"
         android:inputType="numberDecimal"
-        android:imeOptions="actionDone"/>
+        android:imeOptions="actionDone"
+        />
 
     <Spinner
         android:id="@+id/currenciesSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_second_level_margin"
+        android:text=""/>
+
 
     <include layout="@layout/progress_bar"/>
 
@@ -41,4 +50,5 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
 </LinearLayout>

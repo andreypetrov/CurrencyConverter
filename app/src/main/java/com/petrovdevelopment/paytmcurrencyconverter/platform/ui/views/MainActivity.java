@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity implements MainView {
     private RecyclerView currenciesRecyclerView;
     private Spinner currenciesSpinner;
     private ShimmerFrameLayout shimmerContainer;
-
+    private TextView dateView;
 
     //TODO simplify card view to improve scrolling?
     //TODO fix keyboard on amountView to disappear on Enter
@@ -48,8 +48,8 @@ public class MainActivity extends BaseActivity implements MainView {
         progressBar = findViewById(R.id.progressBar);
         errorView = findViewById(R.id.errorView);
         currenciesRecyclerView = findViewById(R.id.currenciesRecyclerView);
+        dateView = findViewById(R.id.dateView);
         shimmerContainer = findViewById(R.id.shimmerContainer);
-
 
         assembleModule();
         configureAmountView();
@@ -175,6 +175,11 @@ public class MainActivity extends BaseActivity implements MainView {
     public void hideProgressIndicator() {
         progressBar.setVisibility(View.INVISIBLE);//INVISIBLE instead of GONE so that the recycler view does not shift up
         shimmerContainer.stopShimmerAnimation();
+    }
+
+    @Override
+    public void updateDate(String date) {
+        dateView.setText(getResources().getString(R.string.as_of, date));
     }
 
     @Override

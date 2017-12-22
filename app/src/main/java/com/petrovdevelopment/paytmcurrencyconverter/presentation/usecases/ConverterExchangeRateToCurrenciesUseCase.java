@@ -4,6 +4,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousU
 import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.exceptions.ExchangeRateResponseException;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 
@@ -15,7 +16,7 @@ import java.util.Map;
  * Created by Andrey on 2017-12-20.
  */
 
-public class ConverterExchangeRateToCurrenciesUseCase implements SynchronousUseCase<List<Currency>> {
+public class ConverterExchangeRateToCurrenciesUseCase implements SynchronousUseCase<CurrenciesWithTimestamp> {
     private final ExchangeRatesResponse exchangeRatesResponse;
     private final Map<String, Currency> currencyLookUp;
     private final double amount;
@@ -27,11 +28,11 @@ public class ConverterExchangeRateToCurrenciesUseCase implements SynchronousUseC
     }
 
     @Override
-    public List<Currency> execute() throws ExchangeRateResponseException {
+    public CurrenciesWithTimestamp execute() throws ExchangeRateResponseException {
         return createCurrenciesList(exchangeRatesResponse);
     }
 
-    private List<Currency> createCurrenciesList(ExchangeRatesResponse response) throws ExchangeRateResponseException {
+    private CurrenciesWithTimestamp createCurrenciesList(ExchangeRatesResponse response) throws ExchangeRateResponseException {
         if (response.getError() != null) throw new ExchangeRateResponseException(response.getError());
         List<Currency> currencies = new ArrayList<>();
         if (response.getRates() != null) {
@@ -43,7 +44,7 @@ public class ConverterExchangeRateToCurrenciesUseCase implements SynchronousUseC
                 currencies.add(currency);
             }
         }
-        return currencies;
+        return new CurrenciesWithTimestamp(response.getDate(), currencies);
     }
 
 }

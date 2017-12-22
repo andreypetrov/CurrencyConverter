@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PaytmCurrencyConverter</string>
+    <string name="app_name">Paytm Currency Converter</string>
 
     <!--Currencies - 32, with one invalid, to test network response error(ISK) -->
     <string name="eur_short">EUR</string>
@@ -72,11 +72,9 @@
     <string name="isk_long">Icelandic krona</string>
     <!-- UI -->
     <string name="amount">Enter an amount</string>
-    <string name="currency">Currency</string>
-    <string name="from">From</string>
-    <string name="to">To</string>
-    <string name="as_of">As of</string>
+    <string name="as_of">as of %1$s</string>
     <string name="amount_label">Amt:</string>
     <string name="exchange_rate_label">Rate:</string>
     <string name="error_generic">Something went wrong.</string>
+    <string name="flag">flag</string>
 </resources>
