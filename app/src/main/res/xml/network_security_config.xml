@@ -2,7 +2,7 @@
 <network-security-config>
     <debug-overrides>
         <trust-anchors>
-            <!-- Trust user added CAs while debuggable only -->
+            <!-- Trust user added CAs while debuggable only. This is useful for our Charles proxy networking testing  -->
             <certificates src="user" />
         </trust-anchors>
     </debug-overrides>

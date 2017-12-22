@@ -4,16 +4,16 @@ import android.content.Context;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
+ * A very simple implementation leveraging okhttp cache, which works for our use case.
+ *
  * Created by Andrey on 2017-12-21.
  * Coding is fun!
  */

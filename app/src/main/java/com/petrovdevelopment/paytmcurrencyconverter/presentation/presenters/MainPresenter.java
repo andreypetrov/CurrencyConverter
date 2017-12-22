@@ -1,6 +1,5 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.observers.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
 
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.observers.CurrenciesListObserver;
