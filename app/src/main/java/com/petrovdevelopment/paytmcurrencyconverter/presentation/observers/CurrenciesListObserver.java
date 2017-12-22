@@ -19,7 +19,6 @@ public class CurrenciesListObserver extends DisposableObserver<CurrenciesWithTim
 
     @Override
     public void onNext(CurrenciesWithTimestamp currenciesWithTimestamp) {
-        Log.log(this, "onNext");
         presenter.setListCurrencies(currenciesWithTimestamp.currencies);
         presenter.updateCurrencyListView();
         presenter.updateDate(currenciesWithTimestamp.date);

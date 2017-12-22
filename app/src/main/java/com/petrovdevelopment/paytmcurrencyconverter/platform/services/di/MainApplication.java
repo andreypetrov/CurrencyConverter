@@ -9,7 +9,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.W
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.CacheHttpClient;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.HttpClient;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 
 /**

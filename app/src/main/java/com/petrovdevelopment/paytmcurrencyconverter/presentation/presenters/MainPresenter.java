@@ -52,7 +52,6 @@ public class MainPresenter {
     //region ### view lifecycle callbacks
 
     public void onViewLoaded() {
-        Log.log(this, "onViewLoaded");
         fetchSelectorCurrencies();
         updateCurrencySelectorView();
     }
@@ -140,7 +139,6 @@ public class MainPresenter {
      **/
     public void onSelectorCurrencySelected(int position) {
         String currencyShortName = selectorCurrencies.get(position).shortName;
-        Log.log(this, "currency selected: " + currencyShortName);
         fetchListCurrencies(currencyShortName);
         updateCurrencyListView();
     }
