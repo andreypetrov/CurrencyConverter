@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * If in the future we need this to keep state, we can inject it from the main application object
  * Created by Andrey on 2017-12-21.
  * Coding is fun!
  */
