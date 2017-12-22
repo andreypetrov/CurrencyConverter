@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.domain.interactors;
+package com.petrovdevelopment.paytmcurrencyconverter.presentation.observers;
 
 import io.reactivex.observers.DisposableObserver;
 

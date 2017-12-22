@@ -1,8 +1,9 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
-import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.observers.BaseObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
 
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.observers.CurrenciesListObserver;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.PresentationUseCaseFactory;
@@ -18,7 +19,6 @@ import java.util.Map;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,6 +38,7 @@ public class MainPresenter {
 
     private List<Currency> selectorCurrencies;
     private Map<String, Currency> currencyLookUp;
+
     private List<Currency> listCurrencies;
 
     private CurrenciesListObserver currenciesListObserver;
@@ -71,9 +72,7 @@ public class MainPresenter {
         Observable<CurrenciesWithTimestamp> listCurrenciesObservable = domainUseCaseFactory.exchangeRatesUseCase(currencyShortName).execute()
                 .map(response -> PresentationUseCaseFactory.convertExchangeRateToCurrenciesUseCase(response, currencyLookUp, currentAmount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
-
-        currenciesListObserver = new CurrenciesListObserver(this);
-        listCurrenciesObservable.subscribe(currenciesListObserver);
+        currenciesListObserver = listCurrenciesObservable.subscribeWith(new CurrenciesListObserver(this));
     }
 
     private void fetchSelectorCurrencies() {
@@ -92,42 +91,20 @@ public class MainPresenter {
             .subscribe(this::updateCurrencyListView);
     }
 
-    private static class CurrenciesListObserver extends BaseObserver<CurrenciesWithTimestamp> {
-        final MainPresenter presenter;
-
-        public CurrenciesListObserver(MainPresenter presenter) {
-            this.presenter = presenter;
-        }
-
-        @Override
-        public void onNext(CurrenciesWithTimestamp currenciesWithTimestamp) {
-            Log.log(this, "onNext");
-            presenter.listCurrencies = currenciesWithTimestamp.currencies;
-            presenter.updateCurrencyListView();
-            presenter.updateDate(currenciesWithTimestamp.date);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            //in an actual app this message should be converted in a more customer friendly message,
-            // using a localized string and possibly assigning it an error code which can help phone support to investigate if customers are calling with complains
-            presenter.showErrorView(e.getLocalizedMessage());
-            presenter.listCurrencies.clear(); //We don't want to mislead the user with showing them stale quotes
-            presenter.updateCurrencyListView();
-            presenter.hideProgressIndicatorView();
-        }
-
-        @Override
-        public void onComplete() {
-            presenter.hideProgressIndicatorView();
-        }
+    public void setListCurrencies(List<Currency> listCurrencies) {
+        this.listCurrencies = listCurrencies;
     }
 
+    public List<Currency> getListCurrencies() {
+        return listCurrencies;
+    }
 
 
     //region ### view updates. Redundant if we keep strong reference to view. We would have to add null checks to them otherwise
 
-    private void updateCurrencyListView() {
+
+
+    public void updateCurrencyListView() {
         mainView.updateCurrencyList();
     }
 
@@ -139,11 +116,11 @@ public class MainPresenter {
         mainView.showProgressIndicator();
     }
 
-    private void hideProgressIndicatorView() {
+    public void hideProgressIndicatorView() {
         mainView.hideProgressIndicator();
     }
 
-    private void showErrorView(String errorMessage) {
+    public void showErrorView(String errorMessage) {
         mainView.showError(errorMessage);
     }
 
@@ -151,7 +128,7 @@ public class MainPresenter {
         mainView.hideError();
     }
 
-    private void updateDate(String date) {
+    public void updateDate(String date) {
         mainView.updateDate(date);
     }
     //endregion
