@@ -43,11 +43,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/currenciesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/currenciesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/card_horizontal_margin"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/currency_card_view" />
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 </LinearLayout>

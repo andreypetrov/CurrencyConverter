@@ -5,6 +5,7 @@
     <dimen name="activity_second_level_margin">8dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_shadow">8dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
     <dimen name="card_field_margins">16dp</dimen>
     <dimen name="card_horizontal_margin">8dp</dimen>
 
