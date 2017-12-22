@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Communication up to view happens only via interfaces. Presenter does not know anything of view implementation logic
@@ -78,9 +81,15 @@ public class MainPresenter {
         currencyLookUp = PresentationUseCaseFactory.createCurrenciesMapUseCase(selectorCurrencies).execute();
     }
 
+    /*
+     * Moved operation to background to assure smoothness of amount updates
+     * @param amount
+     */
     public void onAmountChanged(String amount) {
-        PresentationUseCaseFactory.updateCurrencyAmountsUseCase(listCurrencies, PresenterUtils.amountToDouble(amount)).execute();
-        updateCurrencyListView();
+        Completable.fromCallable(() -> PresentationUseCaseFactory.updateCurrencyAmountsUseCase(listCurrencies, PresenterUtils.amountToDouble(amount)).execute())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::updateCurrencyListView);
     }
 
     private static class CurrenciesListObserver extends BaseObserver<CurrenciesWithTimestamp> {
