@@ -10,7 +10,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.Presenter
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
 import java.util.ArrayList;
 import java.util.List;

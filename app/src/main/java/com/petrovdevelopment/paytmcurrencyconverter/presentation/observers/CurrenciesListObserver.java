@@ -1,6 +1,5 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.observers;
 
-import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 
