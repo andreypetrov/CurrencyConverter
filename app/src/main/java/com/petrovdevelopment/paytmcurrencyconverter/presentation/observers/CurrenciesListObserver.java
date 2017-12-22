@@ -4,7 +4,6 @@ import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 
-import io.reactivex.Observer;
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -12,7 +11,7 @@ import io.reactivex.observers.DisposableObserver;
  * Coding is fun!
  */
 public class CurrenciesListObserver extends DisposableObserver<CurrenciesWithTimestamp> {
-    final MainPresenter presenter;
+    private final MainPresenter presenter;
 
     public CurrenciesListObserver(MainPresenter presenter) {
         this.presenter = presenter;

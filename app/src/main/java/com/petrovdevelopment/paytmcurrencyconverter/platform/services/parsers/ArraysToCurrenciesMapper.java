@@ -16,7 +16,7 @@ public class ArraysToCurrenciesMapper {
     private static final String XML_ERROR_MESSAGE = "You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!";
 
     public static List<Currency> convertToCurrencies(TypedArray currencyFlags, String[] currencyShortNames, String[] currencyLongNames) {
-        if (!isValid(currencyFlags, currencyShortNames, currencyLongNames)) throw new XmlLocalException(XML_ERROR_MESSAGE);
+        if (!isValid(currencyFlags, currencyShortNames, currencyLongNames)) throw new XmlLocalException();
 
         List<Currency> currencyList = new ArrayList<>();
         for (int i = 0; i < currencyFlags.length(); i++) {
@@ -39,8 +39,8 @@ public class ArraysToCurrenciesMapper {
     }
 
     public static class XmlLocalException extends Error {
-        public XmlLocalException(String xmlErrorMessage) {
-            super(xmlErrorMessage);
+        public XmlLocalException() {
+            super(ArraysToCurrenciesMapper.XML_ERROR_MESSAGE);
         }
     }
 }

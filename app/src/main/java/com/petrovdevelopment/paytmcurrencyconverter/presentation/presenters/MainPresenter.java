@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class MainPresenter {
-    private MainView mainView;
+    private final MainView mainView;
     private final DomainUseCaseFactory domainUseCaseFactory;
 
     private List<Currency> selectorCurrencies;
