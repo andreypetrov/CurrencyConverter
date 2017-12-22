@@ -1,17 +1,14 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.interactors.BaseObserver;
-import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.ExchangeRatesUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
 
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainProvider;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.ui.MainView;
+import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.PresentationUseCaseFactory;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.ConverterExchangeRateToCurrenciesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.CreateCurrenciesMapUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.LocalCurrenciesUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases.UpdateCurrencyAmountsUseCase;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import com.petrovdevelopment.paytmcurrencyconverter.platform.utils.Log;
 
@@ -34,8 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainPresenter {
     private MainView mainView;
-    private final MainProvider mainProvider;
-
+    private final DomainUseCaseFactory domainUseCaseFactory;
     private List<Currency> selectorCurrencies;
     private Map<String, Currency> currencyLookUp;
     private List<Currency> listCurrencies;
@@ -50,7 +46,7 @@ public class MainPresenter {
     }
 
     public MainPresenter(MainProvider mainProvider) {
-        this.mainProvider = mainProvider;
+        domainUseCaseFactory = mainProvider.getDomainUseCaseFactory();
         selectorCurrencies = new ArrayList<>();
         listCurrencies = new ArrayList<>();
     }
@@ -74,8 +70,8 @@ public class MainPresenter {
         showProgressIndicatorView();
         hideErrorView();
         Double currentAmount = PresenterUtils.amountToDouble(mainView.getAmount());
-        Observable<CurrenciesWithTimestamp> listCurrenciesObservable = new ExchangeRatesUseCase(mainProvider.getAsynchronousGateway(), currencyShortName).execute()
-                .map(response -> new ConverterExchangeRateToCurrenciesUseCase(response, currencyLookUp, currentAmount).execute())
+        Observable<CurrenciesWithTimestamp> listCurrenciesObservable = domainUseCaseFactory.exchangeRatesUseCase(currencyShortName).execute()
+                .map(response -> PresentationUseCaseFactory.convertExchangeRateToCurrenciesUseCase(response, currencyLookUp, currentAmount).execute())
                 .observeOn(AndroidSchedulers.mainThread());
 
         currenciesListObserver = new CurrenciesListObserver(this);
@@ -83,14 +79,12 @@ public class MainPresenter {
     }
 
     private void fetchSelectorCurrencies() {
-        selectorCurrencies = new LocalCurrenciesUseCase(mainProvider.getSynchronousGateway()).execute();
-        currencyLookUp = new CreateCurrenciesMapUseCase(selectorCurrencies).execute();
+        selectorCurrencies = domainUseCaseFactory.localCurrenciesUseCase().execute();
+        currencyLookUp = PresentationUseCaseFactory.createCurrenciesMapUseCase(selectorCurrencies).execute();
     }
 
-
-
     public void onAmountChanged(String amount) {
-        new UpdateCurrencyAmountsUseCase(listCurrencies, PresenterUtils.amountToDouble(amount)).execute();
+        PresentationUseCaseFactory.updateCurrencyAmountsUseCase(listCurrencies, PresenterUtils.amountToDouble(amount)).execute();
         updateCurrencyListView();
     }
 

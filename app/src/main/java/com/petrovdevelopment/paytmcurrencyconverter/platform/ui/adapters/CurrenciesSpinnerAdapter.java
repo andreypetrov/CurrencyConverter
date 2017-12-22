@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.MainPresenter;
 
 /**
@@ -22,11 +22,6 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
 
     public CurrenciesSpinnerAdapter(MainPresenter presenter) {
         this.presenter = presenter;
-    }
-
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return super.getDropDownView(position, convertView, parent);
     }
 
     @Override

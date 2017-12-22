@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.AsynchronousGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.DomainUseCaseFactory;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.WebGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.gateways.XmlLocalGateway;
 import com.petrovdevelopment.paytmcurrencyconverter.platform.services.net.CacheHttpClient;
@@ -18,6 +19,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.outer.di.MainPr
 public class MainApplication extends Application implements MainProvider {
     private SynchronousGateway localGateway;
     private AsynchronousGateway asynchronousGateway;
+    private DomainUseCaseFactory domainUseCaseFactory;
 
     @Override
     public void onCreate() {
@@ -25,13 +27,11 @@ public class MainApplication extends Application implements MainProvider {
         Log.log(this, "hello");
     }
 
-    @Override
     public SynchronousGateway getSynchronousGateway() {
         if (localGateway == null) localGateway = new XmlLocalGateway(this);
         return localGateway;
     }
 
-    @Override
     public AsynchronousGateway getAsynchronousGateway() {
         if (asynchronousGateway == null) {
             HttpClient client = CacheHttpClient.createDefaultClient(this);
@@ -39,4 +39,13 @@ public class MainApplication extends Application implements MainProvider {
         }
         return asynchronousGateway;
     }
+
+    @Override
+    public DomainUseCaseFactory getDomainUseCaseFactory() {
+        if (domainUseCaseFactory == null) {
+            domainUseCaseFactory = new DomainUseCaseFactory(getAsynchronousGateway(), getSynchronousGateway());
+        }
+        return domainUseCaseFactory;
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways;
 
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import java.util.List;
 

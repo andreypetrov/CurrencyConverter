@@ -1,7 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class CreateCurrenciesMapUseCase implements SynchronousUseCase<Map<String, Currency>> {
     private final List<Currency> currencies;
 
-    public CreateCurrenciesMapUseCase(List<Currency> currencies) {
+    CreateCurrenciesMapUseCase(List<Currency> currencies) {
         this.currencies  = currencies;
     }
 

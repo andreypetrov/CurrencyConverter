@@ -1,5 +1,7 @@
 package com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels;
 
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
+
 import java.util.List;
 
 /**

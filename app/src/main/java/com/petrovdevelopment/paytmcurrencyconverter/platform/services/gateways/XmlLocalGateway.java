@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 
 import com.petrovdevelopment.paytmcurrencyconverter.R;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.SynchronousGateway;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 
 import java.util.ArrayList;
 import java.util.List;

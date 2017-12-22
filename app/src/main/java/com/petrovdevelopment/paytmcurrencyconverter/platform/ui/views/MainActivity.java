@@ -125,12 +125,6 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         presenter.onViewUnloaded();

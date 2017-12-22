@@ -2,7 +2,7 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class UpdateCurrencyAmountsUseCase implements SynchronousUseCase<Void> {
     private final List<Currency> listCurrencies;
     private final double amount;
 
-    public UpdateCurrencyAmountsUseCase(List<Currency> listCurrencies, double amount) {
+    UpdateCurrencyAmountsUseCase(List<Currency> listCurrencies, double amount) {
         this.listCurrencies = listCurrencies;
         this.amount = amount;
     }

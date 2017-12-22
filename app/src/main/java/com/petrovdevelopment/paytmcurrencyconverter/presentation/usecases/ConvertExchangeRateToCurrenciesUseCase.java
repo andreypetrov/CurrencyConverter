@@ -5,7 +5,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.models.exceptions.ExchangeRateResponseException;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.models.ExchangeRatesResponse;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
-import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ import java.util.Map;
  * Created by Andrey on 2017-12-20.
  */
 
-public class ConverterExchangeRateToCurrenciesUseCase implements SynchronousUseCase<CurrenciesWithTimestamp> {
+public class ConvertExchangeRateToCurrenciesUseCase implements SynchronousUseCase<CurrenciesWithTimestamp> {
     private final ExchangeRatesResponse exchangeRatesResponse;
     private final Map<String, Currency> currencyLookUp;
     private final double amount;
 
-    public ConverterExchangeRateToCurrenciesUseCase(ExchangeRatesResponse exchangeRatesResponse, Map<String, Currency> currencyLookUp, double amount) {
+    ConvertExchangeRateToCurrenciesUseCase(ExchangeRatesResponse exchangeRatesResponse, Map<String, Currency> currencyLookUp, double amount) {
         this.exchangeRatesResponse = exchangeRatesResponse;
         this.currencyLookUp = currencyLookUp;
         this.amount = amount;
