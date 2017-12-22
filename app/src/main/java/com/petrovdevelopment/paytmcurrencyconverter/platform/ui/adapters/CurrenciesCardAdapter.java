@@ -16,7 +16,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.Main
  */
 
 public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAdapter.ViewHolder> {
-    private MainPresenter presenter;
+    private final MainPresenter presenter;
 
     public CurrenciesCardAdapter(MainPresenter presenter) {
         this.presenter = presenter;
@@ -44,11 +44,11 @@ public class CurrenciesCardAdapter extends RecyclerView.Adapter<CurrenciesCardAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView flagView;
-        TextView shortNameView;
-        TextView longNameView;
-        TextView exchangeRateView;
-        TextView amountView;
+        final ImageView flagView;
+        final TextView shortNameView;
+        final TextView longNameView;
+        final TextView exchangeRateView;
+        final TextView amountView;
 
         public ViewHolder(View itemView) {
             super(itemView);

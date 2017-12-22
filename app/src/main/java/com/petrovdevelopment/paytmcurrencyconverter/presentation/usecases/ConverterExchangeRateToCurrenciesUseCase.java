@@ -2,8 +2,8 @@ package com.petrovdevelopment.paytmcurrencyconverter.presentation.usecases;
 
 import com.petrovdevelopment.paytmcurrencyconverter.domain.usecases.SynchronousUseCase;
 import com.petrovdevelopment.paytmcurrencyconverter.domain.utils.CurrencyUtils;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.exceptions.ExchangeRateResponseException;
-import com.petrovdevelopment.paytmcurrencyconverter.platform.services.models.ExchangeRatesResponse;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.exceptions.ExchangeRateResponseException;
+import com.petrovdevelopment.paytmcurrencyconverter.domain.models.ExchangeRatesResponse;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.CurrenciesWithTimestamp;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.viewmodels.Currency;
 import com.petrovdevelopment.paytmcurrencyconverter.presentation.utils.PresenterUtils;

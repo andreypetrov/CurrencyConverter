@@ -5,10 +5,11 @@ import com.petrovdevelopment.paytmcurrencyconverter.domain.outer.gateways.Synchr
 
 /**
  * Created by Andrey on 2017-12-19.
+ * Coding is fun!
  */
 
 public interface MainProvider {
-    public SynchronousGateway getSynchronousGateway();
-    public AsynchronousGateway getAsynchronousGateway();
+    SynchronousGateway getSynchronousGateway();
+    AsynchronousGateway getAsynchronousGateway();
 
 }

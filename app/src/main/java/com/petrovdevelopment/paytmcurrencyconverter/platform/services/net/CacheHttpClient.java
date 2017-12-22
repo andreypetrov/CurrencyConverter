@@ -28,8 +28,8 @@ public class CacheHttpClient implements HttpClient {
     private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024; // 10MB
     private static final int DEFAULT_CACHE_AGE_IN_MINUTES = 30;
 
-    private CacheControl cacheControl;
-    private OkHttpClient okHttpClient;
+    private final CacheControl cacheControl;
+    private final OkHttpClient okHttpClient;
 
     public CacheHttpClient(Context context, int cacheSize, int maxStaleAgeInMinutes) {
         cacheControl = createCacheControl(maxStaleAgeInMinutes);
@@ -67,7 +67,6 @@ public class CacheHttpClient implements HttpClient {
                 .addHeader(CONTENT_TYPE_NAME, CONTENT_TYPE_VALUE_JSON)
                 .cacheControl(cacheControl)
                 .build();
-        Response response = okHttpClient.newCall(request).execute();
-        return response;
+        return okHttpClient.newCall(request).execute();
     }
 }

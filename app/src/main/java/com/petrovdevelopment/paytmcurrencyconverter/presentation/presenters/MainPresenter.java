@@ -34,7 +34,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainPresenter {
     private MainView mainView;
-    private MainProvider mainProvider;
+    private final MainProvider mainProvider;
 
     private List<Currency> selectorCurrencies;
     private Map<String, Currency> currencyLookUp;
@@ -95,7 +95,7 @@ public class MainPresenter {
     }
 
     private static class CurrenciesListObserver extends BaseObserver<CurrenciesWithTimestamp> {
-        MainPresenter presenter;
+        final MainPresenter presenter;
 
         public CurrenciesListObserver(MainPresenter presenter) {
             this.presenter = presenter;

@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class XmlLocalGateway implements SynchronousGateway {
-    Context context;
+    private final Context context;
     private static final String XML_ERROR_MESSAGE = "You should provide a matching length of currency flags, long names and short names. Check your arrays.xml!";
     public XmlLocalGateway(Context context) {
         this.context = context;

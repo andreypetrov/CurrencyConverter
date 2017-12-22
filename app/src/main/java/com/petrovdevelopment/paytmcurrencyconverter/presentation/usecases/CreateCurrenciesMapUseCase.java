@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 public class CreateCurrenciesMapUseCase implements SynchronousUseCase<Map<String, Currency>> {
-    List<Currency> currencies;
+    private final List<Currency> currencies;
 
     public CreateCurrenciesMapUseCase(List<Currency> currencies) {
         this.currencies  = currencies;

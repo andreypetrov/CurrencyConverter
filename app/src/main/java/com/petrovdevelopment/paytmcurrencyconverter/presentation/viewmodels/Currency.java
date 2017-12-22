@@ -8,18 +8,10 @@ import android.graphics.drawable.Drawable;
 
 public class Currency {
     public Drawable flag; //TODO replace drawable by resource id to make model view-independent
-    public String shortName;
+    public final String shortName;
     public String longName;
     public String exchangeRate;
     public String amount;
-
-//    public Currency(String shortName, String longName, Drawable flagResourceId) {
-//        this.shortName = shortName;
-//        this.longName = longName;
-//        this.flagResourceId = flagResourceId;
-//        exchangeRate = "1.35";
-//        amount = "232323232323233423213asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfadfa234523231421341234213412341234123412342134232.23";
-//    }
 
     public Currency(String shortName) {
         this.shortName = shortName;

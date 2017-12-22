@@ -18,7 +18,7 @@ import com.petrovdevelopment.paytmcurrencyconverter.presentation.presenters.Main
  */
 
 public class CurrenciesSpinnerAdapter extends BaseAdapter {
-    private MainPresenter presenter;
+    private final MainPresenter presenter;
 
     public CurrenciesSpinnerAdapter(MainPresenter presenter) {
         this.presenter = presenter;
@@ -51,23 +51,23 @@ public class CurrenciesSpinnerAdapter extends BaseAdapter {
         return view;
     }
 
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    private void onBindViewHolder(ViewHolder holder, int position) {
         Currency currency = presenter.getSelectorCurrency(position); //alternatively we could call getItem(position) as it does the same, but this would require a cast
         holder.flagView.setImageDrawable(currency.flag);
         holder.shortNameView.setText(currency.shortName);
     }
 
-    View createView(ViewGroup viewGroup) {
+    private View createView(ViewGroup viewGroup) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.currency_spinner_view, viewGroup, false);
         view.setTag(new ViewHolder(view));
         return view;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView flagView;
-        TextView shortNameView;
+        final ImageView flagView;
+        final TextView shortNameView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             flagView = itemView.findViewById(R.id.flag);
             shortNameView = itemView.findViewById(R.id.shortName);

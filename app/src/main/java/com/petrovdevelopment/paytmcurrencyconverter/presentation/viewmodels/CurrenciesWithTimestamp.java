@@ -8,8 +8,8 @@ import java.util.List;
  */
 
 public class CurrenciesWithTimestamp {
-    public String date;
-    public List<Currency> currencies;
+    public final String date;
+    public final List<Currency> currencies;
 
     public CurrenciesWithTimestamp(String date, List<Currency> currencies) {
         this.date = date;

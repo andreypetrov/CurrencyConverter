@@ -1,4 +1,4 @@
-package com.petrovdevelopment.paytmcurrencyconverter.platform.services.models;
+package com.petrovdevelopment.paytmcurrencyconverter.domain.models;
 
 import java.util.Map;
 

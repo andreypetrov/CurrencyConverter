@@ -13,10 +13,8 @@ public abstract class BaseActivity extends Activity {
 
     /**
      * Convenience method to access the application object without casting every time
-     *
-     * @return
      */
-    public MainApplication getApp() {
+    MainApplication getApp() {
         return (MainApplication) getApplication();
     }
 
